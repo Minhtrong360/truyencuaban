@@ -25,6 +25,29 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>CoderStore</title>
+    <style>
+      input[type="date"]::-webkit-calendar-picker-indicator {
+        background: transparent;
+        bottom: 0;
+        color: transparent;
+        cursor: pointer;
+        height: auto;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: auto;
+      }
+      input[value=""]::-webkit-datetime-edit {
+        color: transparent;
+      }
+      input:focus::-webkit-datetime-edit {
+        color: #000;
+      }
+    </style>
+    <script>
+      $("#date").datepicker({ dateFormat: "yyyy-mm-dd" }).val();
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

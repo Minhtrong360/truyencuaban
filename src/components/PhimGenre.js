@@ -15,7 +15,7 @@ function PhimGenre({ genreID, setGenreID }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [page, setPage] = useState(1);
-  console.log("phimgenre", genreID.id);
+
   useEffect(() => {
     const getProducts = async () => {
       setLoading(true);

@@ -1,48 +1,83 @@
 import * as React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import PhimGenre from "../components/PhimGenre";
 import PhimhayAll from "../components/PhimhayAll";
-import PhimmoiAll from "../components/PhimmoiAll";
+import AllStoriesWithPagination from "../components/AllStoriesWithPagination";
 import PhimphobienAll from "../components/PhimphobienAll";
 import PhimSearch from "../components/PhimSearch";
+import ChapterContent from "../features/chapter/ChapterContent";
+import ChapterCreate from "../features/chapter/ChapterCreate";
+import Subscription from "../features/user/Subscription";
 
 import BlankLayout from "../layouts/BlankLayout";
 import MainLayout from "../layouts/MainLayout";
+import AccountPage from "../pages/AccountPage";
+import CreateStoryAndChapterPage from "../pages/CreateStoryAndChapterPage";
+import EditStoryAndChapterPage from "../pages/EditStoryAndChapterPage";
 import DetailPage from "../pages/DetailPage";
+
 import HomePage from "../pages/HomePage";
+import LoginPage from "../pages/LoginPage";
 
 import NotFoundPage from "../pages/NotFoundPage";
+import RegisterPage from "../pages/RegisterPage";
+
+import SubRequire from "./SubRequire";
+
+import AllHotStoriesWithPagination from "../components/AllHotStoriesWithPagination";
+import AllLoveStoriesWithPagination from "../components/AllLoveStoriesWithPagination";
+import AllSearchStories from "../components/AllSearchStories";
 // import AuthRequire from "./AuthRequire";
 
 function Router() {
-  const [genreID, setGenreID] = React.useState();
-  const [search, setSearch] = React.useState();
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <MainLayout
-            genreID={genreID}
-            setGenreID={setGenreID}
-            search={search}
-            setSearch={setSearch}
-          />
-        }
-      >
+      <Route path="/" element={<MainLayout />}>
         <Route index element={<HomePage />} />
-        <Route path="product/:id" element={<DetailPage />} />
-        <Route path="product/hot-move" element={<PhimmoiAll />} />
-        <Route path="product/popular-move" element={<PhimphobienAll />} />
+        <Route path="story/:id" element={<DetailPage />} />
+
+        <Route
+          path="account/editstory/:id"
+          element={<EditStoryAndChapterPage />}
+        />
+        <Route
+          path="/story/create"
+          element={
+            <SubRequire>
+              <CreateStoryAndChapterPage />
+            </SubRequire>
+          }
+        />
+        <Route
+          path="/story/create/chapter"
+          element={
+            <SubRequire>
+              <ChapterCreate />
+            </SubRequire>
+          }
+        />
+
+        <Route path="stories/all" element={<AllStoriesWithPagination />} />
+        <Route path="stories/:genres" element={<AllStoriesWithPagination />} />
+        <Route
+          path="stories/hot-stories"
+          element={<AllHotStoriesWithPagination />}
+        />
+        <Route
+          path="stories/love-stories"
+          element={<AllLoveStoriesWithPagination />}
+        />
         <Route path="product/good-move" element={<PhimhayAll />} />
-        <Route
-          path="product/genre-move"
-          element={<PhimGenre genreID={genreID} />}
-        />
-        <Route
-          path="product/search-move"
-          element={<PhimSearch search={search} />}
-        />
+        <Route path="/login" element={<LoginPage />} />
+        {/* toask: tại sao LoginPage k nằm trong AuthRequire mà vẫn xài useLocation được */}
+        <Route path="/register" element={<RegisterPage />} />
+
+        <Route path="/account" element={<AccountPage />} />
+        <Route path="/subscription" element={<Subscription />} />
+
+        <Route path="/chapter/:id" element={<ChapterContent />} />
+
+        <Route path="/search" element={<AllSearchStories />} />
       </Route>
 
       <Route element={<BlankLayout />}>

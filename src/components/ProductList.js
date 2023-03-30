@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import ProductCard from "./ProductCard";
+import ProductCard from "./StoryCard";
 
 function ProductList({ products }) {
   console.log("product in ProductList", products);

@@ -5,7 +5,7 @@ import apiService from "../app/apiService";
 
 import LoadingScreen from "./LoadingScreen";
 import { API_KEY } from "../app/config";
-import ProductListPhimhay from "./ProductListPhimhay";
+import ProductListPhimhay from "./StoriesList";
 
 function Phimhay() {
   const [products, setProducts] = useState([]);

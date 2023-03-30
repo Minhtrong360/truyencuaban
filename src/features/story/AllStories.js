@@ -4,35 +4,27 @@ import { Alert, Box, Container, Stack, Typography } from "@mui/material";
 // import ProductSearch from "./ProductSearch";
 // import ProductSort from "./ProductSort";
 
-import apiService from "../app/apiService";
+import apiService from "../../app/apiService";
+import apiService2 from "../../app/apiService2";
 // import orderBy from "lodash/orderBy";
-import LoadingScreen from "./LoadingScreen";
-import { API_KEY } from "../app/config";
-import ProductListPhimhay from "./ProductListPhimhay";
+import LoadingScreen from "../../components/LoadingScreen";
+import { API_KEY } from "../../app/config";
+import StoriesList from "../../components/StoriesList";
+import { useDispatch, useSelector } from "react-redux";
+import { getStories } from "./storySlice";
 
-function Phimmoi() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+function AllStories() {
+  const [page, setPage] = useState(1);
+  const { AllStories, currentPageStories, isLoading, totalPosts, error } =
+    useSelector((state) => state.story);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const getProducts = async () => {
-      setLoading(true);
-      try {
-        const res = await apiService.get(
-          `trending/movie/week?api_key=${API_KEY}&language=vi`
-        );
-        setProducts(res.data);
+    dispatch(getStories({ page }));
+  }, [dispatch, page, totalPosts]);
 
-        setError("");
-      } catch (error) {
-        console.log(error);
-        setError(error.message);
-      }
-      setLoading(false);
-    };
-    getProducts();
-  }, []);
+  console.log("AllStories", AllStories);
 
   return (
     <Container sx={{ display: "flex", minHeight: "100vh", mt: 3 }}>
@@ -58,22 +50,22 @@ function Phimmoi() {
               justifyContent: "space-between",
             }}
           >
-            <span>PHIM HOT</span>
-            <a style={{ cursor: "pointer" }} href="product/hot-move">
+            <span>All Stories</span>
+            <a style={{ cursor: "pointer" }} href="stories/all">
               XEM TẤT CẢ ▼{" "}
             </a>
           </Typography>
         </Stack>
 
         <Box sx={{ position: "relative", height: 1 }}>
-          {loading ? (
+          {isLoading ? (
             <LoadingScreen />
           ) : (
             <>
               {error ? (
                 <Alert severity="error">{error}</Alert>
               ) : (
-                <ProductListPhimhay products={products.results} />
+                <StoriesList stories={AllStories} />
               )}
             </>
           )}
@@ -83,4 +75,4 @@ function Phimmoi() {
   );
 }
 
-export default Phimmoi;
+export default AllStories;

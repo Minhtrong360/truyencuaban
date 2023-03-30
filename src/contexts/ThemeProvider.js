@@ -35,6 +35,7 @@ function ThemeProvider({ children }) {
       primary: PRIMARY,
       secondary: SECONDARY,
       success: SUCCESS,
+      mode: "dark",
     },
     shape: { borderRadius: 8 },
   };

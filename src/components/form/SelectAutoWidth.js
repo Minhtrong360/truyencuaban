@@ -8,6 +8,11 @@ import { useState, useEffect, useRef } from "react";
 import apiService from "../../app/apiService";
 import { API_KEY } from "../../app/config";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getStories,
+  getStoriesWithSort,
+} from "../../features/story/storySlice";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -19,41 +24,26 @@ const MenuProps = {
   },
 };
 
-// function getStyles(name, personName, theme) {
-//   return {
-//     fontWeight:
-//       personName.indexOf(name) === -1
-//         ? theme.typography.fontWeightRegular
-//         : theme.typography.fontWeightMedium,
-//   };
-// }
-
-export default function MultipleSelectPlaceholder({ genreID, setGenreID }) {
+export default function MultipleSelectPlaceholder() {
   // const [personName, setPersonName] = React.useState([]);
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const ref = useRef();
+  const { AllStories, isLoading, error } = useSelector((state) => state.story);
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   useEffect(() => {
-    const getProducts = async () => {
-      setLoading(true);
-      try {
-        const res = await apiService.get(
-          `genre/movie/list?api_key=${API_KEY}&language=vi`
-        );
-        setProducts(res.data.genres);
+    dispatch(getStories({ page: 1, limit: 10000000000 }));
+  }, [dispatch]);
 
-        setError("");
-      } catch (error) {
-        console.log(error);
-        setError(error.message);
+  let GenresAllow = [];
+
+  AllStories.forEach((story) => {
+    const genresArr = story.genres.split(", ");
+    genresArr.forEach((genre) => {
+      if (!GenresAllow.includes(genre)) {
+        GenresAllow.push(genre);
       }
-      setLoading(false);
-    };
-    getProducts();
-  }, []);
-
+    });
+  });
   return (
     <div>
       <FormControl sx={{ m: 1, width: 200 }}>
@@ -61,11 +51,15 @@ export default function MultipleSelectPlaceholder({ genreID, setGenreID }) {
           multiple
           displayEmpty
           value={[]}
-          sx={{ fontWeight: 400, color: "white", fontSize: "1.2rem" }}
+          sx={{
+            fontWeight: 400,
+            color: "white",
+            fontSize: "1.2rem",
+          }}
           input={<OutlinedInput />}
           renderValue={(selected) => {
             if (selected.length === 0) {
-              return <em>THỂ LOẠI KHÁC</em>;
+              return <em> Thể loại khác</em>;
             }
 
             return selected.join(", ");
@@ -73,22 +67,18 @@ export default function MultipleSelectPlaceholder({ genreID, setGenreID }) {
           MenuProps={MenuProps}
           inputProps={{ "aria-label": "Without label" }}
         >
-          <MenuItem disabled value="">
-            <em>none</em>
-          </MenuItem>
-
-          {products.map((product) => (
+          {GenresAllow.map((genre) => (
             <MenuItem
-              key={product.name}
-              value={product.name}
+              sx={{ padding: "7.5px 14px" }}
+              key={genre}
+              value={genre}
               // ref={ref}
               onClick={() => {
-                setGenreID(product);
-                navigate(`product/genre-move`);
+                navigate(`stories/:${genre}`);
               }}
               // style={getStyles(name, personName, theme)}
             >
-              {product.name}
+              {genre?.toUpperCase()}
             </MenuItem>
           ))}
         </Select>

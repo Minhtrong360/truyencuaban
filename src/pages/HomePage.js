@@ -1,18 +1,19 @@
+import { Divider } from "@mui/material";
 import React from "react";
 
-import Phimhay from "../components/Phimhay";
+import StoriesWithGenres from "../features/story/StoriesWithGenres";
 
-import Phimmoi from "../components/Phimmoi";
-
-import Phimphobien from "../components/Phimphobien";
-
-function HomePage({ genreID }) {
-  console.log("homepage", genreID);
+function HomePage() {
   return (
     <>
-      <Phimmoi />
-      <Phimphobien />
-      <Phimhay />
+      <StoriesWithGenres genres={"xuyên không"} />
+
+      <StoriesWithGenres genres={"thể thao"} />
+      <StoriesWithGenres genres={"Adventure"} />
+      <StoriesWithGenres genres={"magic"} />
+      <StoriesWithGenres genres={"comedy"} />
+      <StoriesWithGenres genres={"drama"} />
+      <StoriesWithGenres genres={"hành động"} />
     </>
   );
 }
