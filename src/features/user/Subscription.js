@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FormProvider, FSelect, FTextField } from "../../components/form";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
@@ -25,8 +25,6 @@ const defaultValues = {
 };
 
 function Subscription() {
-  // const [duration, setDuration] = useState("30");
-  // const [bankingAccount, setBankingAccount] = useState("");
   const auth = useAuth();
   let navigate = useNavigate();
   let location = useLocation(); // toask: tai sao location.state: null?
@@ -36,12 +34,7 @@ function Subscription() {
     defaultValues,
   });
 
-  const {
-    handleSubmit,
-    reset,
-    setError,
-    formState: { errors, isSubmiting },
-  } = methods;
+  const { handleSubmit } = methods;
 
   const handleClickConfirm = async (data) => {
     const from = location.state?.from?.pathname || "/";
@@ -50,7 +43,7 @@ function Subscription() {
     const { duration } = data;
 
     try {
-      const response = await apiService2
+      await apiService2
         .post(`/subscriptions/${userId}`, {
           duration,
           time: Date.now(),
@@ -66,7 +59,6 @@ function Subscription() {
       toast.success("Subcription is success");
       navigate(from, { replace: true });
     } catch (error) {
-      console.log("confirm error", error);
       toast.error(error);
     }
   };
@@ -76,13 +68,6 @@ function Subscription() {
 
     navigate(from, { replace: true });
   };
-
-  // const handleSeriChange = (event) => {
-  //   setBankingAccount(event.target.value);
-  // };
-  // const handleDurationChange = (event) => {
-  //   setDuration(event.target.value);
-  // };
 
   return (
     <Container maxWidth="xs">

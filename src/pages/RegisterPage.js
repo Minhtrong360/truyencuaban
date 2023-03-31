@@ -45,7 +45,7 @@ function RegisterPage() {
 
   const onSubmit = async (data) => {
     let { name, email, password } = data;
-    console.log("auth", auth);
+
     try {
       await auth.register({ name, email, password }, () => {
         navigate("/", { replace: true });

@@ -2,7 +2,6 @@ import { Grid } from "@mui/material";
 import ProductCard from "./StoryCard";
 
 function ProductList({ products }) {
-  console.log("product in ProductList", products);
   return (
     <Grid container spacing={2} mt={1}>
       {products.slice(0, 15).map((product, index) => (

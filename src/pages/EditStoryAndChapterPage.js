@@ -3,9 +3,6 @@ import React, { useEffect, useState } from "react";
 
 import ChapterCreate from "../features/chapter/ChapterCreate";
 
-import * as yup from "yup";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useParams } from "react-router-dom";
@@ -17,7 +14,7 @@ import { getChaptersOfStory } from "../features/chapter/chapterSlice";
 
 function EditStoryAndChapterPage() {
   const [story, setStory] = useState([]);
-  // const [chapter, setChapter] = useState(null);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -33,10 +30,9 @@ function EditStoryAndChapterPage() {
         const res = await apiService2.get(`/stories/${params.id}`);
         setStory(res.data.data);
         window.scrollTo({ top: 0, behavior: "smooth" });
-        console.log("story in EditStoryAndChapterPage:", story);
+
         setError("");
       } catch (error) {
-        console.log("error in EditStoryAndChapterPage:", error);
         setError(error);
       }
       setLoading(false);

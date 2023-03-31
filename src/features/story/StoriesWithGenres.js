@@ -28,7 +28,6 @@ function StoriesWithGenres({ genres }) {
     dispatch(getStories({ page: 1, limit: 1000 }));
   }, [dispatch]);
 
-  console.log("storiesWithGenres", storiesWithGenres);
   return (
     <Container sx={{ display: "flex", mt: 3, height: "40rem" }}>
       <Stack sx={{ flexGrow: 1 }}>

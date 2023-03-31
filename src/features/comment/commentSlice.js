@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { toast } from "react-toastify";
-import apiService from "../../app/apiService";
+
 import apiService2 from "../../app/apiService2";
 import { COMMENTS_PER_POST } from "../../app/config";
 
@@ -121,7 +121,7 @@ const slice = createSlice({
     updateCommentSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
-      console.log("action.payload in commentSlice", action.payload);
+
       const newComment = action.payload;
       let author = state.commentsById[newComment._id].author;
       state.commentsById[newComment._id] = newComment;
@@ -145,10 +145,7 @@ export const getComments =
         const response = await apiService2.get(`/stories/${storyId}/comments`, {
           params,
         });
-        console.log(
-          "response in Story commentSlice",
-          response.data.data.comments
-        );
+
         dispatch(
           slice.actions.getCommentsSuccess({
             ...response.data.data,
@@ -164,10 +161,7 @@ export const getComments =
             params,
           }
         );
-        console.log(
-          "response in Chapter commentSlice",
-          response.data.data.comments
-        );
+
         dispatch(
           slice.actions.getCommentsSuccess({
             ...response.data.data,
@@ -186,6 +180,7 @@ export const createComment =
   ({ storyId, chapterId, content }) =>
   async (dispatch) => {
     dispatch(slice.actions.startLoading());
+
     try {
       if (storyId) {
         const response = await apiService2.post("/comments", {
@@ -193,13 +188,7 @@ export const createComment =
           targetId: storyId,
           content,
         });
-        console.log(
-          "create comment in Story comment slice",
-          response.data.data
-        );
-        dispatch(
-          slice.actions.createCommentSuccess(response.data.data.comments)
-        );
+        dispatch(slice.actions.createCommentSuccess(response.data.data));
         dispatch(getComments({ storyId }));
       }
       if (chapterId) {
@@ -212,9 +201,7 @@ export const createComment =
           "create comment in Chapter comment slice",
           response.data.data
         );
-        dispatch(
-          slice.actions.createCommentSuccess(response.data.data.comments)
-        );
+        dispatch(slice.actions.createCommentSuccess(response.data.data));
         dispatch(getComments({ chapterId }));
       }
     } catch (error) {
@@ -231,7 +218,7 @@ export const deleteComment =
       if (storyId) {
         let text = "Do you want to delete it?";
         if (window.confirm(text) === true) {
-          const response = await apiService2.delete(`/comments/${commentId}`);
+          await apiService2.delete(`/comments/${commentId}`);
           dispatch(slice.actions.removeCommentSuccess({ commentId, storyId }));
           toast.success("Delete comment successfully");
         }
@@ -239,7 +226,7 @@ export const deleteComment =
       if (chapterId) {
         let text = "Do you want to delete it?";
         if (window.confirm(text) === true) {
-          const response = await apiService2.delete(`/comments/${commentId}`);
+          await apiService2.delete(`/comments/${commentId}`);
           dispatch(
             slice.actions.removeCommentSuccess({ commentId, chapterId })
           );
@@ -257,7 +244,6 @@ export const deleteComment =
 export const updateComment =
   ({ content, commentID, storyId, chapterId }) =>
   async (dispatch) => {
-    console.log("storyId in updateComment", storyId);
     dispatch(slice.actions.startLoading());
     try {
       let data = { content };

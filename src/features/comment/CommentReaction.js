@@ -12,7 +12,7 @@ function CommentReaction({ comment }) {
   const handleClick = (emoji) => {
     dispatch(updateReactionComment({ commentId: comment._id, emoji }));
   };
-  console.log("comment in CommentReaction", comment);
+
   return (
     <Stack direction="row" alignItems="center">
       <IconButton

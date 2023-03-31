@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect } from "react";
-import { Box, Grid, Card, Stack, Typography, TextField } from "@mui/material";
+import React, { useCallback } from "react";
+import { Box, Grid, Card, Stack, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import useAuth from "../../hooks/useAuth";
 
@@ -23,10 +23,6 @@ const UpdateUserSchema = yup.object().shape({
 
 function AccountGeneral() {
   const { user } = useAuth();
-
-  // useEffect(() => {
-  //   console.log("useAuth", user);
-  // }, [user]);
 
   const isLoading = useSelector((state) => state.user.isLoading);
 
@@ -75,7 +71,7 @@ function AccountGeneral() {
       );
       setValue("cover", contentFiles[0]);
     },
-    [setValue, methods]
+    [setValue]
   );
 
   const onSubmit = (data) => {

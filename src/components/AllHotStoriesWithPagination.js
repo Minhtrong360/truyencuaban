@@ -7,8 +7,7 @@ import ClickableLinkChips from "./form/ClickableLinkChips";
 
 import StoriesList from "./StoriesList";
 import { useDispatch, useSelector } from "react-redux";
-import { getStories, getStoriesWithSort } from "../features/story/storySlice";
-import { useParams } from "react-router-dom";
+import { getStoriesWithSort } from "../features/story/storySlice";
 
 function AllHotStoriesWithPagination() {
   const { AllStoriesWithSort, isLoading, error } = useSelector(

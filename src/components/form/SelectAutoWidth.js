@@ -4,15 +4,11 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { useState, useEffect, useRef } from "react";
-import apiService from "../../app/apiService";
-import { API_KEY } from "../../app/config";
+import { useEffect } from "react";
+
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getStories,
-  getStoriesWithSort,
-} from "../../features/story/storySlice";
+import { getStories } from "../../features/story/storySlice";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -26,7 +22,7 @@ const MenuProps = {
 
 export default function MultipleSelectPlaceholder() {
   // const [personName, setPersonName] = React.useState([]);
-  const { AllStories, isLoading, error } = useSelector((state) => state.story);
+  const { AllStories } = useSelector((state) => state.story);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

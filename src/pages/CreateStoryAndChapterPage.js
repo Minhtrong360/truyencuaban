@@ -11,8 +11,6 @@ function CreateStoryAndChapterPage() {
 
   const [isCreating, setIsCreating] = useState(true);
 
-  console.log("isCreating in Create...", isCreating);
-
   return (
     <Container sx={{ my: 3, overflowAnchor: "none" }}>
       <Box sx={{ position: "relative", height: 1 }}>

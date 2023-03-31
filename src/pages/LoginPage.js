@@ -10,8 +10,7 @@ import { LoadingButton } from "@mui/lab";
 import { Alert, IconButton, InputAdornment, Link, Stack } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { auth as authFirebase } from "../hooks/firebaseConfig";
-import firebase from "firebase/compat/app";
+
 import "firebase/compat/auth";
 
 const loginSchema = Yup.object().shape({
@@ -51,27 +50,6 @@ function LoginPage() {
     } catch (error) {
       reset();
       setError("responeError", { message: error });
-    }
-  };
-  const handleGoogleLogin = async () => {
-    const provider = new firebase.authFirebase.GoogleAuthProvider();
-    try {
-      await authFirebase.signInWithPopup(provider);
-      // Redirect to home page after successful login
-      navigate("/");
-    } catch (error) {
-      setError("responseError", { message: error.message });
-    }
-  };
-
-  const handleFacebookLogin = async () => {
-    const provider = new firebase.authFirebase.FacebookAuthProvider();
-    try {
-      await auth.signInWithPopup(provider);
-      // Redirect to home page after successful login
-      navigate("/");
-    } catch (error) {
-      setError("responseError", { message: error.message });
     }
   };
 

@@ -1,10 +1,8 @@
 import * as React from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
-import PhimGenre from "../components/PhimGenre";
-import PhimhayAll from "../components/PhimhayAll";
+import { Routes, Route } from "react-router-dom";
+
 import AllStoriesWithPagination from "../components/AllStoriesWithPagination";
-import PhimphobienAll from "../components/PhimphobienAll";
-import PhimSearch from "../components/PhimSearch";
+
 import ChapterContent from "../features/chapter/ChapterContent";
 import ChapterCreate from "../features/chapter/ChapterCreate";
 import Subscription from "../features/user/Subscription";
@@ -57,7 +55,6 @@ function Router() {
           }
         />
 
-        <Route path="stories/all" element={<AllStoriesWithPagination />} />
         <Route path="stories/:genres" element={<AllStoriesWithPagination />} />
         <Route
           path="stories/hot-stories"
@@ -67,7 +64,7 @@ function Router() {
           path="stories/love-stories"
           element={<AllLoveStoriesWithPagination />}
         />
-        <Route path="product/good-move" element={<PhimhayAll />} />
+
         <Route path="/login" element={<LoginPage />} />
         {/* toask: tại sao LoginPage k nằm trong AuthRequire mà vẫn xài useLocation được */}
         <Route path="/register" element={<RegisterPage />} />

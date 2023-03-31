@@ -162,7 +162,6 @@ export const deleteChapter =
 export const updateChapter =
   ({ chapterId }, { data }) =>
   async (dispatch) => {
-    console.log("data in chapterSlice:", data);
     const { title, avatar, content } = data;
     dispatch(slice.actions.startLoading());
     try {

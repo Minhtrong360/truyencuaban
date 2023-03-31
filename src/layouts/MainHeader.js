@@ -5,12 +5,8 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import SearchIcon from "@mui/icons-material/Search";
+
 import Logo from "../components/Logo";
-
-import { styled, alpha } from "@mui/material/styles";
-
-import InputBase from "@mui/material/InputBase";
 
 import { SelectAutoWidth } from "../components/form";
 
@@ -20,10 +16,6 @@ import { Avatar, Divider, Menu, Stack } from "@mui/material";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 
-import MSearchBar from "../components/MSearchBar";
-
-import MoreIcon from "@mui/icons-material/MoreVert";
-import ChairIcon from "@mui/icons-material/Chair";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import StarIcon from "@mui/icons-material/Star";
 import { Link, useLocation } from "react-router-dom";
@@ -35,20 +27,20 @@ function MainHeader({ genreID, setGenreID, search, setSearch }) {
 
   const navigate = useNavigate();
 
-  const Search = styled("div")(({ theme }) => ({
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(1),
-      width: "auto",
-    },
-  }));
+  // const Search = styled("div")(({ theme }) => ({
+  //   position: "relative",
+  //   borderRadius: theme.shape.borderRadius,
+  //   backgroundColor: alpha(theme.palette.common.white, 0.15),
+  //   "&:hover": {
+  //     backgroundColor: alpha(theme.palette.common.white, 0.25),
+  //   },
+  //   marginLeft: 0,
+  //   width: "100%",
+  //   [theme.breakpoints.up("sm")]: {
+  //     marginLeft: theme.spacing(1),
+  //     width: "auto",
+  //   },
+  // }));
 
   // const SearchIconWrapper = styled("div")(({ theme }) => ({
   //   padding: theme.spacing(0, 2),
@@ -78,7 +70,6 @@ function MainHeader({ genreID, setGenreID, search, setSearch }) {
   // }));
 
   let auth = useAuth();
-  console.log("first", auth);
 
   let location = useLocation();
 
@@ -96,9 +87,9 @@ function MainHeader({ genreID, setGenreID, search, setSearch }) {
     console.log(location);
   };
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
+  // const handleMobileMenuOpen = (event) => {
+  //   setMobileMoreAnchorEl(event.currentTarget);
+  // };
 
   const handleLogout = () => {
     handleMenuClose(); //menu close before signout so that login won't pop up.

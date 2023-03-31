@@ -63,8 +63,6 @@ const slice = createSlice({
       state.isLoading = false;
       state.error = null;
 
-      console.log("action payload trong storySlice", action.payload);
-
       const { stories, count, totalPages } = action.payload;
 
       // story.forEach((story) => {
@@ -79,8 +77,6 @@ const slice = createSlice({
     getLovedStoriesOfUserSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
-
-      console.log("action payload trong storySlice", action.payload);
 
       const { stories, count } = action.payload;
 
@@ -236,7 +232,7 @@ export const getStoriesWithSort =
   ({ page = 1, limit = STORIES_PER_PAGE, sort }) =>
   async (dispatch) => {
     dispatch(slice.actions.startLoading());
-    console.log("getStoriesWithSort", sort);
+
     try {
       const params = { page, limit };
       const response = await apiService2.get(`/stories`, {
@@ -249,13 +245,11 @@ export const getStoriesWithSort =
         storiesWithGenres = response.data.data.stories.sort(
           (a, b) => b.view - a.view
         );
-        console.log("storiesWithGenres", storiesWithGenres);
       }
       if (sort === "like") {
         storiesWithGenres = response.data.data.stories.sort(
           (a, b) => b.reactions.like - a.reactions.like
         );
-        console.log("storiesWithGenres", storiesWithGenres);
       }
       dispatch(slice.actions.getAllStoriesWithSortSuccess(storiesWithGenres));
     } catch (error) {
@@ -269,18 +263,9 @@ export const createStory =
   async (dispatch) => {
     dispatch(slice.actions.startLoading());
     // try {
-    const data = {
-      title,
-      authorName,
-      artist,
-      genres,
-      minimumAge,
-      summarize,
-      cover,
-    };
-    console.log("data in createStory", data);
+
     const imageUrl = await cloudinaryUpload([cover]);
-    console.log("createStory", imageUrl);
+
     await apiService2
       .post("/stories", {
         title,
@@ -304,7 +289,6 @@ export const createStory =
 export const deleteStory =
   ({ storyId, userId, page = 1, limit = POSTS_PER_PAGE }) =>
   async (dispatch) => {
-    console.log("storyId in deleteStory:", storyId);
     dispatch(slice.actions.startLoading());
     try {
       let text = "Do you want to delete it?";

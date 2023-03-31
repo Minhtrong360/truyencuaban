@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Box, Grid, Card, Stack, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
@@ -9,12 +9,8 @@ import { FormProvider, FTextField, FUploadImage } from "../../components/form";
 import { fData } from "../../utils/numberFormat";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  createChapter,
-  getChaptersOfStory,
-  updateChapter,
-} from "./chapterSlice";
-import { useNavigate, useParams } from "react-router-dom";
+import { createChapter, updateChapter } from "./chapterSlice";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const UpdateUserSchema = yup.object().shape({

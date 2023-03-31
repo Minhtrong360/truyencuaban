@@ -31,8 +31,6 @@ function CommentForm({ storyId, commentID, setIsEdit, isEdit, chapterId }) {
       return;
     }
     if (isEdit) {
-      console.log("storyId in commentForm", storyId);
-      console.log("chapterId in commentForm", chapterId);
       dispatch(updateComment({ content, commentID, storyId, chapterId }));
       setContent("");
       setIsEdit(false);

@@ -8,7 +8,6 @@ import AccountGeneral from "../features/user/AccountGeneral";
 import AccountSocialLinks from "../features/user/AccountSocialLinks";
 import StoriesListOfUser from "../features/story/StoriesListOfUser";
 
-import { capitalCase } from "change-case";
 import LovedStoriesListOfUser from "../features/story/LovedStoriesListOfUser";
 
 function AccountPage() {

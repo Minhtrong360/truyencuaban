@@ -8,11 +8,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, FTextField, FUploadAvatar } from "../../components/form";
 import { fData } from "../../utils/numberFormat";
 import { useDispatch, useSelector } from "react-redux";
-import { createStory, updateStory } from "./storySlice";
-import { reset } from "numeral";
+import { createStory } from "./storySlice";
+
 import { useState } from "react";
-import { toast } from "react-toastify";
-import useAuth from "../../hooks/useAuth";
 
 const UpdateStorySchema = yup.object().shape({
   title: yup.string().required("Title is required"),
@@ -61,7 +59,7 @@ function StoryCreate({ isCreating, setIsCreating }) {
 
       setValue("cover", contentFiles[0]);
     },
-    [setValue, methods]
+    [setValue]
   );
 
   useEffect(() => {
@@ -77,7 +75,6 @@ function StoryCreate({ isCreating, setIsCreating }) {
   }, [status, error]);
 
   const onSubmit = (data) => {
-    console.log("data in onSubmit", data);
     dispatch(createStory(data));
     setStatus("started");
   };

@@ -17,9 +17,8 @@ const UpdateUserSchema = yup.object().shape({
 
 function EditChapter({ setIsEditing }) {
   const { user } = useAuth();
-  console.log("2", user);
+
   const isLoading = useSelector((state) => state.user.isLoading);
-  console.log("3", isLoading);
 
   const defaultValues = {
     name: user?.name || "",

@@ -34,7 +34,7 @@ function PhimGenre({ genreID, setGenreID }) {
     };
     getProducts();
   }, [page, genreID.id]);
-  console.log("SOS", products);
+
   return (
     <Container sx={{ display: "flex", minHeight: "100vh", mt: 3 }}>
       <Stack sx={{ flexGrow: 1 }}>

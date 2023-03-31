@@ -33,7 +33,7 @@ function PhimSearch({ search, setSearch }) {
     };
     getProducts();
   }, [page, search]);
-  console.log("SOS", products);
+
   return (
     <Container sx={{ display: "flex", minHeight: "100vh", mt: 3 }}>
       <Stack sx={{ flexGrow: 1 }}>

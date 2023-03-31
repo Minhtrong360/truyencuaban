@@ -32,7 +32,6 @@ function AllStoriesWithPagination() {
   const offset = 8 * (page - 1);
   let storiesWithPagination = storiesWithGenres.slice(offset, offset + 8);
 
-  console.log("storiesWithGenres", storiesWithPagination);
   return (
     <Container sx={{ display: "flex", mt: 3 }}>
       <Stack sx={{ flexGrow: 1 }}>

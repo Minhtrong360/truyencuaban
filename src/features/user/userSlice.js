@@ -79,10 +79,10 @@ export const updateUserProfile =
       };
       if (cover instanceof File) {
         const imageUrl = await cloudinaryUpload([cover]);
-        console.log("cover in updateUserProfile", imageUrl);
+
         data.cover = imageUrl[0];
       }
-      console.log("truoc khi up len server", data);
+
       const response = await apiService2.put(`/users/${userId}`, data);
 
       dispatch(slice.actions.updateUserProfileSuccess(response.data.data));
@@ -137,8 +137,6 @@ export const updateLovedStory =
       const data = {
         lovedStory,
       };
-
-      console.log("truoc khi up len server", data);
       const response = await apiService2.put(
         `/users/${userId}/lovedStory`,
         data

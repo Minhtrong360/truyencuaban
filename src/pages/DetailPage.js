@@ -23,7 +23,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChapterGeneral from "../features/ChapterGeneral";
 import CommentForm from "../features/comment/CommentForm";
 import { styled } from "@mui/material/styles";
-import { capitalCase } from "change-case";
+
 import CommentList from "../features/comment/CommentList";
 import { useDispatch, useSelector } from "react-redux";
 import {

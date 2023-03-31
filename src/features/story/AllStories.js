@@ -24,8 +24,6 @@ function AllStories() {
     dispatch(getStories({ page }));
   }, [dispatch, page, totalPosts]);
 
-  console.log("AllStories", AllStories);
-
   return (
     <Container sx={{ display: "flex", minHeight: "100vh", mt: 3 }}>
       <Stack sx={{ flexGrow: 1 }}>

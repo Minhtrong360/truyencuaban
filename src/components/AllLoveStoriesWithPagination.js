@@ -24,7 +24,6 @@ function AllLoveStoriesWithPagination() {
 
   const offset = 8 * (page - 1);
   let storiesWithPagination = AllStoriesWithSort.slice(offset, offset + 8);
-  console.log("storiesWithGenres", storiesWithPagination);
 
   return (
     <Container sx={{ display: "flex", mt: 3 }}>

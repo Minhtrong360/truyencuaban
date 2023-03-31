@@ -1,4 +1,3 @@
-import { LoadingButton } from "@mui/lab";
 import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,9 +10,7 @@ function StoriesListOfUser() {
   const auth = useAuth();
   const userId = auth.user._id;
   const [page, setPage] = useState(1);
-  const { storiesOfUser, totalPages, totalStories, isLoading } = useSelector(
-    (state) => state.story
-  );
+  const { storiesOfUser } = useSelector((state) => state.story);
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -58,7 +58,6 @@ function StoryGenenal({ setIsEditing }) {
   );
 
   const onSubmit = (data) => {
-    console.log("create and update story", data);
     dispatch(updateStory({ storyId: stories._id, ...data }));
   };
 

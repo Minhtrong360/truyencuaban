@@ -36,8 +36,6 @@ export default function ClickableLinkChips({ page, setPage, stories }) {
     setBtns(iniBtns);
   }, [stories, page, setPage]);
 
-  console.log("btns in ClickableLinkChips", btnCount);
-
   return (
     <Container
       sx={{

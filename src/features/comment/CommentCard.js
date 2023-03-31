@@ -11,8 +11,7 @@ import {
 } from "@mui/material";
 import { fDate } from "../../utils/formatTime";
 import CommentReaction from "./CommentReaction";
-import { useDispatch } from "react-redux";
-import { deleteComment } from "./commentSlice";
+
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import CommentForm from "./CommentForm";
 
@@ -31,12 +30,11 @@ function CommentCard({ comment, onDelete, storyId, chapterId }) {
   };
   const handleDelete = () => {
     setAnchorEl(null);
-    console.log("Delete comment in CommentCard", comment._id);
+
     onDelete(comment._id);
   };
 
   const handleEdit = () => {
-    console.log("edit comment in CommentCard", comment);
     setIsEdit(true);
     setAnchorEl(null);
   };
@@ -70,7 +68,7 @@ function CommentCard({ comment, onDelete, storyId, chapterId }) {
 
   return (
     <Stack direction="row" spacing={2}>
-      <Avatar alt={comment?.author?.name} src={comment?.author?.avatarUrl} />
+      <Avatar alt={comment?.author?.name} src={comment?.author?.cover} />
 
       <Paper sx={{ p: 1.5, flexGrow: 1, bgcolor: "background.neutral" }}>
         <Stack

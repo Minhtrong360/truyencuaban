@@ -1,6 +1,5 @@
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import LoadingScreen from "../components/LoadingScreen";
 
 function SubRequire({ children }) {
   const { user } = useAuth();

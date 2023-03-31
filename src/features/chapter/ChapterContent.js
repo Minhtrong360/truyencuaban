@@ -7,7 +7,6 @@ import {
   Box,
   Button,
   Container,
-  Grid,
   Paper,
   Stack,
   Typography,
@@ -17,8 +16,6 @@ import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import InsertCommentIcon from "@mui/icons-material/InsertComment";
 import LoadingScreen from "../../components/LoadingScreen";
-import CommentForm from "../comment/CommentForm";
-import CommentList from "../comment/CommentList";
 
 import ChatBox from "../../components/ChatBox";
 import { styled } from "@mui/material/styles";
@@ -34,7 +31,7 @@ function ChapterContent() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { chaptersOfStory } = useSelector((state) => state.chapter);
-  console.log("params", params);
+
   useEffect(() => {
     if (params.id) {
       const getSingleChapter = async () => {
@@ -55,7 +52,6 @@ function ChapterContent() {
       getSingleChapter();
     }
   }, [params.id]);
-  console.log("chaptersOfStory in ChapterContent:", chaptersOfStory);
 
   useEffect(() => {
     if (chapter?.ofStory?._id)
@@ -69,19 +65,17 @@ function ChapterContent() {
     setShowComments(!showComments);
   };
 
-  console.log("chapter in ChapterContent:", chapter);
-
   const ChatBoxWrapper = styled(Paper)(({ theme }) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
 
     position: "absolute",
-    right: "-80px",
-    bottom: "120px",
+    right: "-250px",
+    bottom: "130px",
 
     height: "565px", // set the height to 565px
-    width: "325px", // set the width to 375px
+    width: "400px", // set the width to 375px
     padding: theme.spacing(2),
     zIndex: 2,
   }));
@@ -114,11 +108,7 @@ function ChapterContent() {
                 justifyContent: "center",
               }}
             >
-              <span>
-                {`CHƯƠNG ${chapter?.number + 1}: ${
-                  chapter?.title
-                } > ${chapter?.ofStory?.title.toUpperCase()}`}
-              </span>
+              <span>{`Chương ${chapter?.number + 1}: ${chapter?.title}`}</span>
             </Typography>
 
             <Stack
@@ -144,7 +134,6 @@ function ChapterContent() {
 
             <Stack
               sx={{
-                width: "100vh",
                 display: "flex",
                 flexDirection: "row",
                 padding: 2,
@@ -175,7 +164,7 @@ function ChapterContent() {
                   if (index === 0) {
                     index = chaptersOfStory.length;
                   }
-                  console.log("index", index);
+
                   const nextChapterId = chaptersOfStory[index - 1]._id;
                   navigate(`/chapter/${nextChapterId}`);
                 }}
@@ -190,8 +179,8 @@ function ChapterContent() {
 
                 {showChapters && (
                   <ChatBoxWrapper>
-                    <Typography sx={{ fontSize: "32px" }}>
-                      Danh sách chương
+                    <Typography sx={{ fontSize: "28px" }}>
+                      DANH SÁCH CHƯƠNG
                     </Typography>
                     <Stack p={1} />
                     <Box
@@ -216,7 +205,7 @@ function ChapterContent() {
                             marginLeft: 0,
                             paddingLeft: 0,
                             textAlign: "left",
-                            fontSize: "28px",
+                            fontSize: "24px",
                           }}
                         >
                           Chương {chapter?.number + 1}

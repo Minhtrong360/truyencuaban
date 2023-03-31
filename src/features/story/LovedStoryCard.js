@@ -4,19 +4,12 @@ import { useNavigate } from "react-router-dom";
 
 import { LoadingButton } from "@mui/lab";
 
-import { useDispatch } from "react-redux";
-
 import StoryGenenal from "../StoryGeneral";
-import { deleteStory } from "./storySlice";
 
 function LovedStoryCard({ story, userId }) {
-  const dispatch = useDispatch();
-
   const [isEditing, setIsEditing] = useState(false);
 
   const navigate = useNavigate();
-
-  console.log("story in LovedStoryCard:", story);
 
   const handleRead = () => {
     navigate(`../story/${story._id}`);

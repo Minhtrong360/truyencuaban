@@ -1,4 +1,3 @@
-import { Divider } from "@mui/material";
 import React from "react";
 
 import StoriesWithGenres from "../features/story/StoriesWithGenres";
