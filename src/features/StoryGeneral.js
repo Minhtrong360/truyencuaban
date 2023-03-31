@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import { Box, Grid, Card, Stack, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import useAuth from "../hooks/useAuth";
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -16,8 +15,9 @@ const UpdateStorySchema = yup.object().shape({
 });
 
 function StoryGenenal({ setIsEditing }) {
-  const { isLoading, error, detail, storiesById, currentPageStories } =
-    useSelector((state) => state.story);
+  const { isLoading, storiesById, currentPageStories } = useSelector(
+    (state) => state.story
+  );
   const stories = currentPageStories.map((story) => storiesById[story]);
   const defaultValues = {
     title: stories?.title || "",

@@ -61,18 +61,20 @@ function AllLoveStoriesWithPagination() {
               {error ? (
                 <Alert severity="error">{error}</Alert>
               ) : (
-                <StoriesList
-                  stories={storiesWithPagination}
-                  noSlide={noSlide}
-                />
+                <>
+                  <StoriesList
+                    stories={storiesWithPagination}
+                    noSlide={noSlide}
+                  />
+                  <ClickableLinkChips
+                    page={page}
+                    setPage={setPage}
+                    stories={AllStoriesWithSort}
+                  />
+                </>
               )}
             </>
           )}
-          <ClickableLinkChips
-            page={page}
-            setPage={setPage}
-            stories={AllStoriesWithSort}
-          />
         </Box>
       </Stack>
     </Container>

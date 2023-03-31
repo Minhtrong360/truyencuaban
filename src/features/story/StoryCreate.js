@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import { Box, Grid, Card, Stack, Typography } from "@mui/material";
+import { Box, Grid, Card, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
 import { useForm } from "react-hook-form";
@@ -75,6 +75,7 @@ function StoryCreate({ isCreating, setIsCreating }) {
   }, [status, error]);
 
   const onSubmit = (data) => {
+    console.log("data gửi về server", data);
     dispatch(createStory(data));
     setStatus("started");
   };

@@ -5,12 +5,13 @@ import ClickableLinkChips from "../../components/form/ClickableLinkChips";
 import StoryCard from "./StoryCard";
 import useAuth from "../../hooks/useAuth";
 import { getStoriesOfUser } from "./storySlice";
+import LoadingScreen from "../../components/LoadingScreen";
 
 function StoriesListOfUser() {
   const auth = useAuth();
   const userId = auth.user._id;
   const [page, setPage] = useState(1);
-  const { storiesOfUser } = useSelector((state) => state.story);
+  const { storiesOfUser, isLoading } = useSelector((state) => state.story);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,22 +26,28 @@ function StoriesListOfUser() {
   let storiesWithPagination = storiesOfUser.slice(offset, offset + 8);
   console.log({ storiesOfUser });
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-      {storiesOfUser.length > 0 ? (
-        <>
-          {storiesWithPagination.map((story) => (
-            <StoryCard key={story._id} story={story} userId={userId} />
-          ))}
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <ClickableLinkChips
-              page={page}
-              setPage={setPage}
-              stories={storiesOfUser}
-            />
-          </Box>
-        </>
+    <Box sx={{ position: "relative", height: 1 }}>
+      {isLoading ? (
+        <LoadingScreen />
       ) : (
-        <Typography variant="h6">No Story</Typography>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+          {storiesOfUser.length > 0 ? (
+            <>
+              {storiesWithPagination.map((story) => (
+                <StoryCard key={story._id} story={story} userId={userId} />
+              ))}
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <ClickableLinkChips
+                  page={page}
+                  setPage={setPage}
+                  stories={storiesOfUser}
+                />
+              </Box>
+            </>
+          ) : (
+            <Typography variant="h6">No Story</Typography>
+          )}
+        </Box>
       )}
     </Box>
   );

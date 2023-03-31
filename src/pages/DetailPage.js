@@ -56,7 +56,7 @@ function DetailPage() {
   const [error, setError] = useState("");
   const params = useParams();
   const dispatch = useDispatch();
-  const { story } = useSelector((state) => state.story);
+  const { story, isLoading } = useSelector((state) => state.story);
   const { user } = useAuth();
 
   useEffect(() => {
@@ -177,10 +177,11 @@ function DetailPage() {
     setCurrentTab(newValue);
   };
 
+  console.log("story in DetailPage", story);
   return (
     <Container sx={{ my: 3, overflowAnchor: "none" }}>
       <Box sx={{ position: "relative", height: 1 }}>
-        {loading ? (
+        {isLoading ? (
           <LoadingScreen />
         ) : (
           <>

@@ -1,7 +1,7 @@
 import { IconButton, Stack, Typography } from "@mui/material";
 import ThumbDownAltRoundedIcon from "@mui/icons-material/ThumbDownAltRounded";
 import ThumbUpRoundedIcon from "@mui/icons-material/ThumbUpRounded";
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { updateReactionComment } from "./commentSlice";
 

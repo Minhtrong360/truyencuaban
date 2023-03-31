@@ -265,7 +265,7 @@ export const createStory =
     // try {
 
     const imageUrl = await cloudinaryUpload([cover]);
-
+    console.log("imageUrl server gửi về ", imageUrl);
     await apiService2
       .post("/stories", {
         title,
@@ -274,7 +274,7 @@ export const createStory =
         genres,
         minimumAge,
         summarize,
-        cover: imageUrl,
+        cover: imageUrl[0],
       })
       .then((data) => {
         dispatch(slice.actions.createStorySuccess(data.data.data));

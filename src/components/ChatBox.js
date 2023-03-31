@@ -20,7 +20,6 @@ const ChatBoxWrapper = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2),
   zIndex: 5,
   "& form": {
-    marginTop: "auto", // Push the form to the bottom
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
