@@ -7,6 +7,8 @@ import { CardActionArea } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import { Box } from "@mui/system";
+import { BASE_URL2 } from "../app/config";
+
 function ProductCard({ story }) {
   const navigate = useNavigate();
 
@@ -17,7 +19,7 @@ function ProductCard({ story }) {
           <CardMedia
             component="img"
             height="400"
-            image={story?.cover}
+            image={`${BASE_URL2}${story?.cover}`}
             alt={story?.title}
             sx={{ objectFit: "fill" }}
           />
@@ -34,7 +36,7 @@ function ProductCard({ story }) {
           marginTop: 2,
         }}
       >
-        {story?.title.toUpperCase()}
+        {story?.title?.toUpperCase()}
       </Typography>
     </Box>
   );

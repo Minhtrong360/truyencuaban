@@ -2,8 +2,6 @@ import { Box, Card, Container, Grid, Typography } from "@mui/material";
 import React, { useState } from "react";
 
 import ChapterCreate from "../features/chapter/ChapterCreate";
-
-import LoadingScreen from "../components/LoadingScreen";
 import StoryCreate from "../features/story/StoryCreate";
 import { useSelector } from "react-redux";
 

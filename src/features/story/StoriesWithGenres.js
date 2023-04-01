@@ -21,6 +21,15 @@ function StoriesWithGenres({ genres }) {
   let storiesWithGenres = AllStories.filter((story) =>
     story.genres.toLowerCase().includes(genres.toLowerCase())
   );
+  if (genres === "hành động") {
+    storiesWithGenres = [
+      ...storiesWithGenres,
+      ...AllStories.filter((story) =>
+        story.genres.toLowerCase().includes("action")
+      ),
+    ];
+  }
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

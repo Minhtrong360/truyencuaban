@@ -25,7 +25,6 @@ const slice = createSlice({
     },
 
     updateUserProfileSuccess(state, action) {
-      state.isLoading = false;
       state.error = null;
 
       state.updatedProfile = action.payload;
@@ -126,13 +125,8 @@ export const getAllUsers = () => async (dispatch) => {
 };
 
 export const updateLovedStory =
-  ({
-    userId,
-
-    lovedStory,
-  }) =>
+  ({ userId, lovedStory }) =>
   async (dispatch) => {
-    dispatch(slice.actions.startLoading());
     try {
       const data = {
         lovedStory,

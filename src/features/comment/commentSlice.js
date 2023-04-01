@@ -62,16 +62,11 @@ const slice = createSlice({
     },
 
     sendCommentReactionSuccess(state, action) {
-      state.isLoading = false;
       state.error = null;
 
       const { reactions, commentId } = action.payload;
 
       state.commentsById[commentId].reactions = reactions.reactions;
-      console.log(
-        `state.commentsById[${commentId}].reactions`,
-        state.commentsById[commentId]
-      );
     },
 
     removeCommentSuccess(state, action) {
@@ -273,8 +268,6 @@ export const updateReactionComment =
   ({ commentId, emoji }) =>
   async (dispatch) => {
     const data = emoji;
-
-    dispatch(slice.actions.startLoading());
     try {
       const response = await apiService2.put(
         `/comments/reaction/${commentId}`,

@@ -50,37 +50,39 @@ function AllSearchStories() {
               fontWeight: 800,
               display: "flex",
               width: "100%",
+
               flexDirection: "row",
               justifyContent: "space-between",
             }}
           >
-            <span>RESULTS: {query}</span>
+            <span>Kết quả: {query}</span>
           </Typography>
         </Stack>
-        {result.length === 0 && <h1>Not Found</h1>}
-        {result && (
-          <Box sx={{ position: "relative", height: 1 }}>
-            {isLoading ? (
-              <LoadingScreen />
-            ) : (
-              <>
-                {error ? (
-                  <Alert severity="error">{error}</Alert>
-                ) : (
+
+        <Box sx={{ position: "relative", height: 1 }}>
+          {isLoading ? (
+            <LoadingScreen />
+          ) : (
+            <>
+              {result.length === 0 && (
+                <h1 style={{ textAlign: "center" }}>Không tìm thấy kết quả</h1>
+              )}
+              {result.length > 0 && (
+                <>
                   <StoriesList
                     stories={storiesWithPagination}
                     noSlide={noSlide}
                   />
-                )}
-              </>
-            )}
-            <ClickableLinkChips
-              page={page}
-              setPage={setPage}
-              stories={result}
-            />
-          </Box>
-        )}
+                  <ClickableLinkChips
+                    page={page}
+                    setPage={setPage}
+                    stories={result}
+                  />
+                </>
+              )}
+            </>
+          )}
+        </Box>
       </Stack>
     </Container>
   );

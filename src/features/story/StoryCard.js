@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 
 import StoryGenenal from "../StoryGeneral";
 import { deleteStory } from "./storySlice";
+import { BASE_URL2 } from "../../app/config";
 
 function StoryCard({ story, userId }) {
   const dispatch = useDispatch();
@@ -81,7 +82,7 @@ function StoryCard({ story, userId }) {
                     width: 250,
                     height: 350,
                   }}
-                  src={story?.cover}
+                  src={`${BASE_URL2}${story?.cover}`}
                   alt="story"
                 />
                 <Box>
@@ -98,7 +99,7 @@ function StoryCard({ story, userId }) {
                         fontSize: "30px",
                         textDecoration: "none",
                         wordWrap: "break-word",
-                        maxWidth: "70%",
+                        maxWidth: "700px",
                       }}
                     >
                       {story?.title.toUpperCase()}

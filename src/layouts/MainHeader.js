@@ -21,6 +21,7 @@ import StarIcon from "@mui/icons-material/Star";
 import { Link, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import SearchInput from "../components/SearchInput";
+import { BASE_URL2 } from "../app/config";
 
 function MainHeader({ genreID, setGenreID, search, setSearch }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -77,13 +78,13 @@ function MainHeader({ genreID, setGenreID, search, setSearch }) {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
+  // const handleMobileMenuClose = () => {
+  //   setMobileMoreAnchorEl(null);
+  // };
 
   const handleMenuClose = () => {
     setAnchorEl(null);
-    handleMobileMenuClose();
+    // handleMobileMenuClose();
     console.log(location);
   };
 
@@ -96,9 +97,10 @@ function MainHeader({ genreID, setGenreID, search, setSearch }) {
     auth.logout();
     navigate("/");
   };
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+  // const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -174,59 +176,59 @@ function MainHeader({ genreID, setGenreID, search, setSearch }) {
     </Menu>
   );
 
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem component={Link} to="/discovery/1">
-        <IconButton
-          size="large"
-          color="inherit"
-          disableRipple={true}
-          children={<YouTubeIcon />}
-        />
-        <p>Discovery</p>
-      </MenuItem>
+  // const mobileMenuId = "primary-search-account-menu-mobile";
+  // const renderMobileMenu = (
+  //   <Menu
+  //     anchorEl={mobileMoreAnchorEl}
+  //     anchorOrigin={{
+  //       vertical: "top",
+  //       horizontal: "right",
+  //     }}
+  //     id={mobileMenuId}
+  //     keepMounted
+  //     transformOrigin={{
+  //       vertical: "top",
+  //       horizontal: "right",
+  //     }}
+  //     open={isMobileMenuOpen}
+  //     onClose={handleMobileMenuClose}
+  //   >
+  //     <MenuItem component={Link} to="/discovery/1">
+  //       <IconButton
+  //         size="large"
+  //         color="inherit"
+  //         disableRipple={true}
+  //         children={<YouTubeIcon />}
+  //       />
+  //       <p>Discovery</p>
+  //     </MenuItem>
 
-      <MenuItem component={Link} to="/favorite">
-        <IconButton
-          size="large"
-          color="inherit"
-          disableRipple={true}
-          children={<StarIcon />}
-        />
+  //     <MenuItem component={Link} to="/favorite">
+  //       <IconButton
+  //         size="large"
+  //         color="inherit"
+  //         disableRipple={true}
+  //         children={<StarIcon />}
+  //       />
 
-        <p>Favorite</p>
-      </MenuItem>
-      <MenuItem component={Link} to="/login">
-        <IconButton
-          size="large"
-          //cool styling ui props
-          aria-label="account of current user"
-          aria-controls={menuId}
-          disableRipple={true}
-          aria-haspopup="true"
-          color="inherit"
-          children={<AccountCircle />}
-        />
+  //       <p>Favorite</p>
+  //     </MenuItem>
+  //     <MenuItem component={Link} to="/login">
+  //       <IconButton
+  //         size="large"
+  //         //cool styling ui props
+  //         aria-label="account of current user"
+  //         aria-controls={menuId}
+  //         disableRipple={true}
+  //         aria-haspopup="true"
+  //         color="inherit"
+  //         children={<AccountCircle />}
+  //       />
 
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
+  //       <p>Profile</p>
+  //     </MenuItem>
+  //   </Menu>
+  // );
 
   return (
     <Box sx={{ minWidth: 400 }}>
@@ -239,7 +241,7 @@ function MainHeader({ genreID, setGenreID, search, setSearch }) {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2, ml: 2 }}
+            sx={{ mr: 2, ml: 2, alignItems: "center" }}
             onClick={() => navigate(`/`)}
           >
             <Logo />
@@ -290,14 +292,14 @@ function MainHeader({ genreID, setGenreID, search, setSearch }) {
           <Box sx={{ marginLeft: 5 }}>
             <Avatar
               onClick={handleProfileMenuOpen}
-              src={auth?.user?.cover}
+              src={`${BASE_URL2}${auth?.user?.cover}`}
               alt={auth?.user?.username}
               sx={{ width: 52, height: 52 }}
             />
           </Box>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
+      {/* {renderMobileMenu} */}
       {renderMenu}
     </Box>
   );

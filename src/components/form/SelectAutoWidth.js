@@ -40,6 +40,8 @@ export default function MultipleSelectPlaceholder() {
       }
     });
   });
+  GenresAllow = GenresAllow.filter((item) => item !== "");
+  console.log("GenresAllow", GenresAllow);
   return (
     <div>
       <FormControl sx={{ m: 1, width: 200 }}>

@@ -33,6 +33,7 @@ import {
 import { updateLovedStory } from "../features/user/userSlice";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
+import { BASE_URL2 } from "../app/config";
 
 const TabsWrapperStyle = styled("div")(({ theme }) => ({
   zIndex: 9,
@@ -52,11 +53,12 @@ const TabsWrapperStyle = styled("div")(({ theme }) => ({
 
 function DetailPage() {
   const [chapter, setChapter] = useState(null);
-  const [loading, setLoading] = useState(true);
+
   const [error, setError] = useState("");
   const params = useParams();
   const dispatch = useDispatch();
   const { story, isLoading } = useSelector((state) => state.story);
+
   const { user } = useAuth();
 
   useEffect(() => {
@@ -88,8 +90,6 @@ function DetailPage() {
   useEffect(() => {
     if (params.id) {
       const getChapters = async () => {
-        setLoading(true);
-
         try {
           const res = await apiService2.get(`/chapters/story/${params.id}`);
 
@@ -100,7 +100,6 @@ function DetailPage() {
           console.log(error);
           setError(error.message);
         }
-        setLoading(false);
       };
       getChapters();
     }
@@ -118,46 +117,50 @@ function DetailPage() {
             justifyContent: "center",
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              width: "90% !important",
-            }}
-          >
-            {chapter?.length > 0 && (
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "100%",
-                  justifyContent: "center",
-                }}
-              >
-                <Typography
-                  color="text.primary"
-                  fontSize="26px"
-                  p={1}
-                  sx={{ overflow: "auto", textAlign: "center" }}
-                >
-                  DANH SÁCH CHƯƠNG
-                </Typography>
-              </Box>
-            )}
+          {isLoading ? (
+            <LoadingScreen />
+          ) : (
             <Box
-              sx={{ display: "flex", flexDirection: "column", width: "100%" }}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                width: "90% !important",
+              }}
             >
-              {chapter?.slice(0, 15).map((chapter, index) => (
-                <Grid item xs={6} md={4} lg={2.4} key={chapter._id}>
-                  <ChapterGeneral
-                    chapter={chapter}
-                    loading={loading}
-                    error={error}
-                  />
-                </Grid>
-              ))}
+              {chapter?.length > 0 && (
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "100%",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Typography
+                    color="text.primary"
+                    fontSize="26px"
+                    p={1}
+                    sx={{ overflow: "auto", textAlign: "center" }}
+                  >
+                    DANH SÁCH CHƯƠNG
+                  </Typography>
+                </Box>
+              )}
+              <Box
+                sx={{ display: "flex", flexDirection: "column", width: "100%" }}
+              >
+                {chapter?.slice(0, 15).map((chapter, index) => (
+                  <Grid item xs={6} md={4} lg={2.4} key={chapter._id}>
+                    <ChapterGeneral
+                      chapter={chapter}
+                      loading={isLoading}
+                      error={error}
+                    />
+                  </Grid>
+                ))}
+              </Box>
             </Box>
-          </Box>
+          )}
         </Container>
       ),
     },
@@ -177,7 +180,6 @@ function DetailPage() {
     setCurrentTab(newValue);
   };
 
-  console.log("story in DetailPage", story);
   return (
     <Container sx={{ my: 3, overflowAnchor: "none" }}>
       <Box sx={{ position: "relative", height: 1 }}>
@@ -221,7 +223,7 @@ function DetailPage() {
                                 overflow: "hidden",
                                 display: "flex",
                                 flexDirection: "row",
-                                justifyContent: "center",
+                                justifyContent: "start",
                                 alignItems: "center",
                               }}
                             >
@@ -232,7 +234,7 @@ function DetailPage() {
                                   height: 400,
                                   marginRight: 3,
                                 }}
-                                src={story?.cover}
+                                src={`${BASE_URL2}${story?.cover}`}
                                 alt={story?.title}
                               />
                               <Box>

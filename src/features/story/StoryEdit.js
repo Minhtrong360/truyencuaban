@@ -9,6 +9,7 @@ import { FormProvider, FTextField, FUploadAvatar } from "../../components/form";
 import { fData } from "../../utils/numberFormat";
 import { useDispatch } from "react-redux";
 import { updateStory } from "./storySlice";
+import { BASE_URL2 } from "../../app/config";
 
 const UpdateStorySchema = yup.object().shape({
   title: yup.string().required("Title is required"),
@@ -26,7 +27,7 @@ function StoryEdit({ story, isLoading }) {
     genres: story?.genres || "",
     minimumAge: story?.minimumAge || "",
     summarize: story?.summarize || "",
-    cover: story?.cover[0] || "",
+    cover: `${BASE_URL2}${story?.cover[0]}` || "",
   };
 
   const methods = useForm({

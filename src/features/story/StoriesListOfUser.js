@@ -34,7 +34,7 @@ function StoriesListOfUser() {
           {storiesOfUser.length > 0 ? (
             <>
               {storiesWithPagination.map((story) => (
-                <StoryCard key={story._id} story={story} userId={userId} />
+                <StoryCard key={story?._id} story={story} userId={userId} />
               ))}
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <ClickableLinkChips

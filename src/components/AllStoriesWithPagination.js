@@ -29,6 +29,23 @@ function AllStoriesWithPagination() {
     story.genres.toLowerCase().includes(genres.toLowerCase())
   );
 
+  if (genres === "hành động") {
+    storiesWithGenres = [
+      ...storiesWithGenres,
+      ...AllStories.filter((story) =>
+        story.genres.toLowerCase().includes("action")
+      ),
+    ];
+  }
+  if (genres === "action") {
+    storiesWithGenres = [
+      ...storiesWithGenres,
+      ...AllStories.filter((story) =>
+        story.genres.toLowerCase().includes("hành động")
+      ),
+    ];
+  }
+
   const offset = 8 * (page - 1);
   let storiesWithPagination = storiesWithGenres.slice(offset, offset + 8);
 
@@ -73,13 +90,13 @@ function AllStoriesWithPagination() {
                   noSlide={noSlide}
                 />
               )}
+              <ClickableLinkChips
+                page={page}
+                setPage={setPage}
+                stories={storiesWithGenres}
+              />
             </>
           )}
-          <ClickableLinkChips
-            page={page}
-            setPage={setPage}
-            stories={storiesWithGenres}
-          />
         </Box>
       </Stack>
     </Container>

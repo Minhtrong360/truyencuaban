@@ -4,7 +4,7 @@ import { Pagination, Stack, Typography } from "@mui/material";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { deleteComment, getComments } from "./commentSlice";
 import CommentCard from "./CommentCard";
-import LoadingScreen from "../../components/LoadingScreen";
+
 import { COMMENTS_PER_POST } from "../../app/config";
 
 function CommentList({ storyId, chapterId }) {
@@ -13,7 +13,7 @@ function CommentList({ storyId, chapterId }) {
     commentsByChapter,
     totalCommentsByStory,
     totalCommentsByChapter,
-    isLoading,
+
     currentPageByStory,
     currentPageByChapter,
     commentsById,
@@ -26,7 +26,7 @@ function CommentList({ storyId, chapterId }) {
 
       currentPageByStory: state.comment.currentPageByStory[storyId] || 1,
       currentPageByChapter: state.comment.currentPageByChapter[chapterId] || 1,
-      isLoading: state.comment.isLoading,
+
       commentsById: state.comment.commentsById,
     }),
     shallowEqual
@@ -55,13 +55,13 @@ function CommentList({ storyId, chapterId }) {
   };
 
   useEffect(() => {
-    if ({ storyId, totalComments }) {
+    if (storyId) {
       dispatch(getComments({ storyId }));
     }
-    if ({ chapterId, totalComments }) {
+    if (chapterId) {
       dispatch(getComments({ chapterId }));
     }
-  }, [storyId, totalComments, chapterId]);
+  }, []);
 
   let renderComments;
   console.log();
@@ -100,8 +100,6 @@ function CommentList({ storyId, chapterId }) {
         ))}
       </Stack>
     );
-  } else if (isLoading) {
-    renderComments = <LoadingScreen />;
   }
 
   return (

@@ -116,32 +116,11 @@ const slice = createSlice({
     },
 
     sendStoryReactionSuccess(state, action) {
-      state.isLoading = false;
       state.error = null;
-
-      console.log(
-        "action.payload in sendStoryReactionSuccess:",
-        action.payload.reactions
-      );
 
       state.story.reactions = action.payload.reactions;
     },
 
-    // removeStorySuccess(state, action) {
-    //   state.isLoading = false;
-    //   state.error = null;
-    //   const { storyId } = action.payload;
-
-    //   const context = state.currentPageStories.find(
-    //     (story) => story === storyId
-    //   );
-    //   const index = state.currentPageStories.indexOf(context);
-
-    //   delete state.storiesById[storyId];
-
-    //   state.currentPageStories.splice(index, 1);
-    //   state.totalStories -= 1;
-    // },
     removeStoryNotSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
@@ -334,7 +313,6 @@ export const updateStory =
 export const updateReactionStory =
   ({ storyId }, { data }) =>
   async (dispatch) => {
-    dispatch(slice.actions.startLoading());
     try {
       const response = await apiService2.put(`/stories/reaction/${storyId}`, {
         data,
