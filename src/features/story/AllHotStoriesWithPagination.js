@@ -1,34 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Alert, Box, Container, Stack, Typography } from "@mui/material";
 
-import LoadingScreen from "./LoadingScreen";
-
-import ClickableLinkChips from "./form/ClickableLinkChips";
-
-import StoriesList from "./StoriesList";
 import { useDispatch, useSelector } from "react-redux";
-import { getStories } from "../features/story/storySlice";
-import { useLocation } from "react-router-dom";
+import { getStoriesWithSort } from "./storySlice";
+import LoadingScreen from "../../components/LoadingScreen";
+import StoriesList from "./StoriesList";
+import ClickableLinkChips from "../../components/form/ClickableLinkChips";
 
-function AllSearchStories() {
-  const { AllStories, isLoading, error } = useSelector((state) => state.story);
+function AllHotStoriesWithPagination() {
+  const { AllStoriesWithSort, isLoading, error } = useSelector(
+    (state) => state.story
+  );
 
-  const noSlide = true;
   const [page, setPage] = useState(1);
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  let query = queryParams.get("query");
+  const noSlide = true;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getStories({ page: 1, limit: 10000 }));
+    dispatch(getStoriesWithSort({ page: 1, limit: 10000000000, sort: "view" }));
   }, [dispatch]);
-  let result = AllStories.filter((story) =>
-    story.title.toLowerCase().includes(query.toLowerCase())
-  );
 
   const offset = 8 * (page - 1);
-  let storiesWithPagination = result.slice(offset, offset + 8);
+  let storiesWithPagination = AllStoriesWithSort.slice(offset, offset + 8);
 
   return (
     <Container sx={{ display: "flex", mt: 3 }}>
@@ -50,12 +43,11 @@ function AllSearchStories() {
               fontWeight: 800,
               display: "flex",
               width: "100%",
-
               flexDirection: "row",
               justifyContent: "space-between",
             }}
           >
-            <span>Kết quả: {query}</span>
+            <span>TRUYỆN HOT</span>
           </Typography>
         </Stack>
 
@@ -64,10 +56,9 @@ function AllSearchStories() {
             <LoadingScreen />
           ) : (
             <>
-              {result.length === 0 && (
-                <h1 style={{ textAlign: "center" }}>Không tìm thấy kết quả</h1>
-              )}
-              {result.length > 0 && (
+              {error ? (
+                <Alert severity="error">{error}</Alert>
+              ) : (
                 <>
                   <StoriesList
                     stories={storiesWithPagination}
@@ -76,7 +67,7 @@ function AllSearchStories() {
                   <ClickableLinkChips
                     page={page}
                     setPage={setPage}
-                    stories={result}
+                    stories={AllStoriesWithSort}
                   />
                 </>
               )}
@@ -88,4 +79,4 @@ function AllSearchStories() {
   );
 }
 
-export default AllSearchStories;
+export default AllHotStoriesWithPagination;

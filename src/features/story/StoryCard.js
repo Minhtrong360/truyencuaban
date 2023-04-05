@@ -6,9 +6,9 @@ import { LoadingButton } from "@mui/lab";
 
 import { useDispatch } from "react-redux";
 
-import StoryGenenal from "../StoryGeneral";
 import { deleteStory } from "./storySlice";
 import { BASE_URL2 } from "../../app/config";
+import StoryGenenal from "./StoryGeneral";
 
 function StoryCard({ story, userId }) {
   const dispatch = useDispatch();

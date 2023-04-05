@@ -1,41 +1,42 @@
----
-author: tuan hoang
-title: React Timer
-id: cs-virgil-2.2-react-eco
----
+# TRUYENCUABAN
 
-# React Timer
+## Description
 
-:timer*clock: \_Building a timer using create-react-app.*
+The Reading Stories Web Application is an online platform where users can read a variety of available stories and also create their own stories to share with other users.
 
-The purpose of this project is to practice our React hooks skills such as `useState` `useRef` and `Custom Hook`
+## User Stories
 
-Everyone know what a timer is eventhough not all timers look the same. Today, we are making a timer that look like this , (_or better!_)
-![clock](https://i.ibb.co/0nYMqfL/Screen-Shot-2022-03-12-at-18-07-21.png)
+The following are the user stories that have been identified for this application:
 
-[Check out this demo to see it in action !](https://cs-react-timer.netlify.app/)
+User Story 1 - As a reader, I want to be able to browse available stories
+As a user, I want to be able to browse through a list of available stories on the platform. I should be able to filter stories by genre or search for a specific story by title.
 
-## User Story
+User Story 2 - As a reader, I want to be able to read a story
+As a user, I want to be able to click on a story and read it in full. The story should be displayed in a clean and easy-to-read format.
 
-- User click start button to start the timer
-- User can not click start button while timer is running
-- User click stop button to see timer stop
-- User can click start to re-start the timer after stop
-- User can click reset button at anytime to reset the timer
-- :rocket: User see a different timer than the one from this example. _Meaning you should change the UI display_
-- :rocket::rocket::rocket: User can "split" the timer, creating multiple records of time per "split-button clicked"
+User Story 3 - As a writer, I want to be able to create a new story
+As a user, I want to be able to create a new story to share with others. I should be able to enter a title, select a genre, and write the story using a simple and intuitive text editor.
 
-## Requirement
+User Story 4 - As a writer, I want to be able to edit and delete my own stories
+As a user, I want to be able to edit or delete my own stories. I should be able to access my stories from my account and make changes or delete them entirely.
 
-Fork this [repo](https://github.com/coderschool/cs-react-timer-starter-code) and read through the files.
-Often time , developers are required to work with an existing codebase and improve upon. This is one of that time.
+User Story 5 - As a reader, I want to be able to leave comments on a story
+As a user, I want to be able to leave comments on a story that I have read. I should be able to view and reply to other comments as well.
 
-You should only code in the designinated area.
-Using the VSC search function for "Your code here", you will see a list of all the placces that required your attention.
+## Technologies Used
 
-## Grading
+The Reading Stories Web Application is built using the following technologies:
 
-| Requirement                                       | Grade |
-| ------------------------------------------------- | ----- |
-| Missing any of the user story that are not rocket | - 5   |
-| Made rocket                                       | + 10  |
+HTML
+CSS
+JavaScript
+React
+Node.js
+Express
+MongoDB
+Getting Started
+To get started with the Reading Stories Web Application, follow these steps:
+
+## Conclusion
+
+The Reading Stories Web Application provides a platform for users to read and share stories. With a clean and intuitive interface, users can easily browse, read, and write stories.

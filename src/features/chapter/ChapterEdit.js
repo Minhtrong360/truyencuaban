@@ -2,14 +2,14 @@ import { useState } from "react";
 import { Card, Grid, Container, Typography, Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-import LoadingScreen from "../components/LoadingScreen";
+import LoadingScreen from "../../components/LoadingScreen";
 import { Alert } from "@mui/material";
 
 import { useDispatch } from "react-redux";
 
-import { deleteChapter } from "./chapter/chapterSlice";
+import { deleteChapter } from "./chapterSlice";
 
-import ChapterCreate from "./chapter/ChapterCreate";
+import ChapterCreate from "./ChapterCreate";
 
 function ChapterEdit({ chapter, loading, error, storyEditing }) {
   const navigate = useNavigate();

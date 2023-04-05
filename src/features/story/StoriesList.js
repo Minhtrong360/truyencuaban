@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
-import StoryCard from "./StoryCard";
+import StoryCard from "./ProductCard";
 
 function StoriesList({ stories, noSlide }) {
   const [currentIndex, setCurrentIndex] = useState(0);

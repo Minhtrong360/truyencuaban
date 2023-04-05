@@ -4,22 +4,12 @@ import MainFooter from "./MainFooter";
 import MainHeader from "./MainHeader";
 import AlertMsg from "../components/form/AlertMsg";
 
-function MainLayout({ genreID, setGenreID, search, setSearch }) {
+function MainLayout() {
   return (
     <Stack sx={{ minHeight: "100vh" }}>
-      <MainHeader
-        genreID={genreID}
-        setGenreID={setGenreID}
-        search={search}
-        setSearch={setSearch}
-      />
+      <MainHeader />
       <AlertMsg />
-      <Outlet
-        genreID={genreID}
-        setGenreID={setGenreID}
-        search={search}
-        setSearch={setSearch}
-      />
+      <Outlet />
 
       <Box sx={{ flexGrow: 1 }} />
 

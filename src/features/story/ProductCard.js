@@ -7,7 +7,7 @@ import { CardActionArea } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import { Box } from "@mui/system";
-import { BASE_URL2 } from "../app/config";
+import { BASE_URL2 } from "../../app/config";
 
 function ProductCard({ story }) {
   const navigate = useNavigate();

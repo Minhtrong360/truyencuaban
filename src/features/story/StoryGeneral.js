@@ -5,10 +5,10 @@ import { LoadingButton } from "@mui/lab";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FormProvider, FTextField, FUploadAvatar } from "../components/form";
-import { fData } from "../utils/numberFormat";
+import { FormProvider, FTextField, FUploadAvatar } from "../../components/form";
+import { fData } from "../../utils/numberFormat";
 import { useDispatch, useSelector } from "react-redux";
-import { updateStory } from "./story/storySlice";
+import { updateStory } from "./storySlice";
 
 const UpdateStorySchema = yup.object().shape({
   title: yup.string().required("Title is required"),

@@ -9,8 +9,9 @@ import { useParams } from "react-router-dom";
 import LoadingScreen from "../components/LoadingScreen";
 import StoryEdit from "../features/story/StoryEdit";
 import apiService2 from "../app/apiService2";
-import ChapterEdit from "../features/ChapterEdit";
+
 import { getChaptersOfStory } from "../features/chapter/chapterSlice";
+import ChapterEdit from "../features/chapter/ChapterEdit";
 
 function EditStoryAndChapterPage() {
   const [story, setStory] = useState([]);
@@ -38,11 +39,11 @@ function EditStoryAndChapterPage() {
       setLoading(false);
     };
     getSingleStory();
-  }, []);
+  }, [params.id]);
 
   useEffect(() => {
     dispatch(getChaptersOfStory({ storyId: params.id }));
-  }, [dispatch]);
+  }, [dispatch, params.id]);
 
   return (
     <Container

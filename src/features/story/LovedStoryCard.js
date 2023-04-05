@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import { LoadingButton } from "@mui/lab";
 
-import StoryGenenal from "../StoryGeneral";
 import { BASE_URL2 } from "../../app/config";
+import StoryGenenal from "./StoryGeneral";
 
 function LovedStoryCard({ story, userId }) {
   const [isEditing, setIsEditing] = useState(false);

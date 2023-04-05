@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { CssBaseline } from "@mui/material";
 import {
   createTheme,
@@ -12,6 +13,7 @@ const PRIMARY = {
   darker: "#cc571f",
   contrastText: "#FFF",
 };
+
 const SECONDARY = {
   lighter: "#D6E4FF",
   light: "#84A9FF",
@@ -20,6 +22,7 @@ const SECONDARY = {
   darker: "#091A7A",
   contrastText: "#FFF",
 };
+
 const SUCCESS = {
   lighter: "#E9FCD4",
   light: "#AAF27F",
@@ -30,12 +33,15 @@ const SUCCESS = {
 };
 
 function ThemeProvider({ children }) {
+  const [mode, setMode] = useState("light");
+
   const themeOptions = {
     palette: {
       primary: PRIMARY,
       secondary: SECONDARY,
       success: SUCCESS,
-      mode: "dark",
+      mode: mode,
+      setMode: setMode,
     },
     shape: { borderRadius: 8 },
   };

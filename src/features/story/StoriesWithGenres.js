@@ -10,7 +10,7 @@ import {
 
 import LoadingScreen from "../../components/LoadingScreen";
 
-import StoriesList from "../../components/StoriesList";
+import StoriesList from "../story/StoriesList";
 import { useDispatch, useSelector } from "react-redux";
 import { getStories } from "./storySlice";
 import { useNavigate } from "react-router-dom";

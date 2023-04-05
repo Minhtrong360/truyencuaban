@@ -20,7 +20,7 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ChapterGeneral from "../features/ChapterGeneral";
+
 import CommentForm from "../features/comment/CommentForm";
 import { styled } from "@mui/material/styles";
 
@@ -34,6 +34,7 @@ import { updateLovedStory } from "../features/user/userSlice";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
 import { BASE_URL2 } from "../app/config";
+import ChapterGeneral from "../features/chapter/ChapterGeneral";
 
 const TabsWrapperStyle = styled("div")(({ theme }) => ({
   zIndex: 9,

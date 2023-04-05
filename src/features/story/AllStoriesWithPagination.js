@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Alert, Box, Container, Stack, Typography } from "@mui/material";
 
-import LoadingScreen from "./LoadingScreen";
-
-import ClickableLinkChips from "./form/ClickableLinkChips";
-
-import StoriesList from "./StoriesList";
 import { useDispatch, useSelector } from "react-redux";
-import { getStories } from "../features/story/storySlice";
+
 import { useParams } from "react-router-dom";
+import { getStories } from "./storySlice";
+import StoriesList from "./StoriesList";
+import ClickableLinkChips from "../../components/form/ClickableLinkChips";
+import LoadingScreen from "../../components/LoadingScreen";
 
 function AllStoriesWithPagination() {
   const { AllStories, isLoading, error } = useSelector((state) => state.story);

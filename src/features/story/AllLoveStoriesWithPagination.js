@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Alert, Box, Container, Stack, Typography } from "@mui/material";
 
-import LoadingScreen from "./LoadingScreen";
-
-import ClickableLinkChips from "./form/ClickableLinkChips";
-
 import StoriesList from "./StoriesList";
 import { useDispatch, useSelector } from "react-redux";
-import { getStoriesWithSort } from "../features/story/storySlice";
+import { getStoriesWithSort } from "./storySlice";
+import LoadingScreen from "../../components/LoadingScreen";
+import ClickableLinkChips from "../../components/form/ClickableLinkChips";
 
-function AllHotStoriesWithPagination() {
+function AllLoveStoriesWithPagination() {
   const { AllStoriesWithSort, isLoading, error } = useSelector(
     (state) => state.story
   );
@@ -19,7 +17,7 @@ function AllHotStoriesWithPagination() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getStoriesWithSort({ page: 1, limit: 10000000000, sort: "view" }));
+    dispatch(getStoriesWithSort({ page: 1, limit: 10000000000, sort: "like" }));
   }, [dispatch]);
 
   const offset = 8 * (page - 1);
@@ -49,7 +47,7 @@ function AllHotStoriesWithPagination() {
               justifyContent: "space-between",
             }}
           >
-            <span>TRUYỆN HOT</span>
+            <span>TRUYỆN YÊU THÍCH</span>
           </Typography>
         </Stack>
 
@@ -81,4 +79,4 @@ function AllHotStoriesWithPagination() {
   );
 }
 
-export default AllHotStoriesWithPagination;
+export default AllLoveStoriesWithPagination;

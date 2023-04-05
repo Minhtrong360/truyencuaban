@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import apiService from "../../app/apiService";
+
 import apiService2 from "../../app/apiService2";
 import { cloudinaryUpload } from "../../utils/cloudinary";
 
@@ -96,7 +96,7 @@ export const updateUserProfile =
 export const getUser = (id) => async (dispatch) => {
   dispatch(slice.actions.startLoading());
   try {
-    const response = await apiService.get(`/users/${id}`);
+    const response = await apiService2.get(`/users/${id}`);
     dispatch(slice.actions.getUserSuccess(response.data.data));
   } catch (error) {
     dispatch(slice.actions.hasError(error));
@@ -117,7 +117,7 @@ export const getCurrentUserProfile = () => async (dispatch) => {
 export const getAllUsers = () => async (dispatch) => {
   dispatch(slice.actions.startLoading());
   try {
-    const response = await apiService.get("/users");
+    const response = await apiService2.get("/users");
     dispatch(slice.actions.updateUserProfileSuccess(response.data.data));
   } catch (error) {
     dispatch(slice.actions.hasError(error));

@@ -110,27 +110,6 @@ function LoginPage() {
         >
           Login
         </LoadingButton>
-
-        {/* <LoadingButton
-          fullWidth
-          size="large"
-          type="button"
-          variant="contained"
-          onClick={handleGoogleLogin}
-          sx={{ marginTop: 2, marginBottom: 2 }}
-        >
-          Login with Google
-        </LoadingButton>
-
-        <LoadingButton
-          fullWidth
-          size="large"
-          type="button"
-          variant="contained"
-          onClick={handleFacebookLogin}
-        >
-          Login with Facebook
-        </LoadingButton> */}
       </FormProvider>
     </Container>
   );

@@ -1,8 +1,9 @@
 import { Card, Grid, Container, Typography, Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-import LoadingScreen from "../components/LoadingScreen";
 import { Alert } from "@mui/material";
+import LoadingScreen from "../../components/LoadingScreen";
+import { BASE_URL2 } from "../../app/config";
 
 function ChapterGeneral({ chapter, loading, error }) {
   const navigate = useNavigate();
@@ -54,7 +55,7 @@ function ChapterGeneral({ chapter, loading, error }) {
                                 width: 150,
                                 height: 150,
                               }}
-                              src={chapter?.avatar}
+                              src={`${BASE_URL2}${chapter?.avatar}`}
                               alt="chapter"
                             />
                             <Box>

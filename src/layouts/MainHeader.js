@@ -4,8 +4,6 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-
 import Logo from "../components/Logo";
 
 import { SelectAutoWidth } from "../components/form";
@@ -16,59 +14,20 @@ import { Avatar, Divider, Menu, Stack } from "@mui/material";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import StarIcon from "@mui/icons-material/Star";
 import { Link, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import SearchInput from "../components/SearchInput";
 import { BASE_URL2 } from "../app/config";
+import { useTheme } from "@emotion/react";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 
-function MainHeader({ genreID, setGenreID, search, setSearch }) {
+function MainHeader() {
+  const theme = useTheme();
+
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const navigate = useNavigate();
-
-  // const Search = styled("div")(({ theme }) => ({
-  //   position: "relative",
-  //   borderRadius: theme.shape.borderRadius,
-  //   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  //   "&:hover": {
-  //     backgroundColor: alpha(theme.palette.common.white, 0.25),
-  //   },
-  //   marginLeft: 0,
-  //   width: "100%",
-  //   [theme.breakpoints.up("sm")]: {
-  //     marginLeft: theme.spacing(1),
-  //     width: "auto",
-  //   },
-  // }));
-
-  // const SearchIconWrapper = styled("div")(({ theme }) => ({
-  //   padding: theme.spacing(0, 2),
-  //   height: "100%",
-  //   position: "absolute",
-  //   pointerEvents: "none",
-  //   display: "flex",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  // }));
-
-  // const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  //   color: "inherit",
-  //   "& .MuiInputBase-input": {
-  //     padding: theme.spacing(1, 1, 1, 0),
-  //     // vertical padding + font size from searchIcon
-  //     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-  //     transition: theme.transitions.create("width"),
-  //     width: "100%",
-  //     [theme.breakpoints.up("sm")]: {
-  //       width: "12ch",
-  //       "&:focus": {
-  //         width: "20ch",
-  //       },
-  //     },
-  //   },
-  // }));
 
   let auth = useAuth();
 
@@ -78,19 +37,9 @@ function MainHeader({ genreID, setGenreID, search, setSearch }) {
     setAnchorEl(event.currentTarget);
   };
 
-  // const handleMobileMenuClose = () => {
-  //   setMobileMoreAnchorEl(null);
-  // };
-
   const handleMenuClose = () => {
     setAnchorEl(null);
-    // handleMobileMenuClose();
-    console.log(location);
   };
-
-  // const handleMobileMenuOpen = (event) => {
-  //   setMobileMoreAnchorEl(event.currentTarget);
-  // };
 
   const handleLogout = () => {
     handleMenuClose(); //menu close before signout so that login won't pop up.
@@ -98,8 +47,18 @@ function MainHeader({ genreID, setGenreID, search, setSearch }) {
     navigate("/");
   };
 
-  // const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
+
+  const colorMode = React.useMemo(
+    () => ({
+      toggleColorMode: () => {
+        theme.palette.setMode((prevMode) =>
+          prevMode === "light" ? "dark" : "light"
+        );
+      },
+    }),
+    [theme.palette]
+  );
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -161,6 +120,34 @@ function MainHeader({ genreID, setGenreID, search, setSearch }) {
           <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
             Đăng xuất
           </MenuItem>
+          <Divider sx={{ borderStyle: "dashed" }} />
+          <Box
+            sx={{
+              display: "flex",
+              width: "100%",
+              alignItems: "center",
+              justifyContent: "center",
+              bgcolor: "background.default",
+              color: "text.primary",
+              borderRadius: 1,
+              p: 1,
+            }}
+          >
+            {theme.palette.mode.charAt(0).toUpperCase() +
+              theme.palette.mode.slice(1)}{" "}
+            mode
+            <IconButton
+              sx={{ ml: 1 }}
+              onClick={colorMode.toggleColorMode}
+              color="inherit"
+            >
+              {theme.palette.mode === "dark" ? (
+                <Brightness7Icon />
+              ) : (
+                <Brightness4Icon />
+              )}
+            </IconButton>
+          </Box>
         </Box>
       ) : (
         <Button
@@ -176,60 +163,16 @@ function MainHeader({ genreID, setGenreID, search, setSearch }) {
     </Menu>
   );
 
-  // const mobileMenuId = "primary-search-account-menu-mobile";
-  // const renderMobileMenu = (
-  //   <Menu
-  //     anchorEl={mobileMoreAnchorEl}
-  //     anchorOrigin={{
-  //       vertical: "top",
-  //       horizontal: "right",
-  //     }}
-  //     id={mobileMenuId}
-  //     keepMounted
-  //     transformOrigin={{
-  //       vertical: "top",
-  //       horizontal: "right",
-  //     }}
-  //     open={isMobileMenuOpen}
-  //     onClose={handleMobileMenuClose}
-  //   >
-  //     <MenuItem component={Link} to="/discovery/1">
-  //       <IconButton
-  //         size="large"
-  //         color="inherit"
-  //         disableRipple={true}
-  //         children={<YouTubeIcon />}
-  //       />
-  //       <p>Discovery</p>
-  //     </MenuItem>
-
-  //     <MenuItem component={Link} to="/favorite">
-  //       <IconButton
-  //         size="large"
-  //         color="inherit"
-  //         disableRipple={true}
-  //         children={<StarIcon />}
-  //       />
-
-  //       <p>Favorite</p>
-  //     </MenuItem>
-  //     <MenuItem component={Link} to="/login">
-  //       <IconButton
-  //         size="large"
-  //         //cool styling ui props
-  //         aria-label="account of current user"
-  //         aria-controls={menuId}
-  //         disableRipple={true}
-  //         aria-haspopup="true"
-  //         color="inherit"
-  //         children={<AccountCircle />}
-  //       />
-
-  //       <p>Profile</p>
-  //     </MenuItem>
-  //   </Menu>
-  // );
-
+  const menuItems = [
+    {
+      label: "Truyện hot",
+      onClick: () => navigate(`/stories/hot-stories`),
+    },
+    {
+      label: "Truyện yêu thích",
+      onClick: () => navigate(`/stories/love-stories`),
+    },
+  ];
   return (
     <Box sx={{ minWidth: 400 }}>
       <AppBar position="static">
@@ -255,32 +198,22 @@ function MainHeader({ genreID, setGenreID, search, setSearch }) {
             </Typography>
           </IconButton>
 
-          <Typography
-            variant="h6"
-            color="inherit"
-            component="div"
-            sx={{
-              cursor: "pointer",
-              marginLeft: 5,
-              "&:hover": { color: "#ff8800" },
-            }}
-            onClick={() => navigate(`/stories/hot-stories`)}
-          >
-            Truyện hot
-          </Typography>
-          <Typography
-            variant="h6"
-            color="inherit"
-            component="div"
-            sx={{
-              cursor: "pointer",
-              marginLeft: 5,
-              "&:hover": { color: "#ff8800" },
-            }}
-            onClick={() => navigate(`/stories/love-stories`)}
-          >
-            Truyện yêu thích
-          </Typography>
+          {menuItems.map((item) => (
+            <Typography
+              key={item.label}
+              variant="h6"
+              color="inherit"
+              component="div"
+              sx={{
+                cursor: "pointer",
+                marginLeft: 5,
+                "&:hover": { color: "black" },
+              }}
+              onClick={item.onClick}
+            >
+              {item.label}
+            </Typography>
+          ))}
 
           <Box sx={{ flexGrow: 1 }} />
           <SelectAutoWidth />
@@ -299,7 +232,7 @@ function MainHeader({ genreID, setGenreID, search, setSearch }) {
           </Box>
         </Toolbar>
       </AppBar>
-      {/* {renderMobileMenu} */}
+
       {renderMenu}
     </Box>
   );

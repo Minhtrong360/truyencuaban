@@ -1,10 +1,8 @@
 import * as React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import AllStoriesWithPagination from "../components/AllStoriesWithPagination";
-
 import ChapterContent from "../features/chapter/ChapterContent";
-import ChapterCreate from "../features/chapter/ChapterCreate";
+
 import Subscription from "../features/user/Subscription";
 
 import BlankLayout from "../layouts/BlankLayout";
@@ -21,10 +19,11 @@ import NotFoundPage from "../pages/NotFoundPage";
 import RegisterPage from "../pages/RegisterPage";
 
 import SubRequire from "./SubRequire";
+import AllHotStoriesWithPagination from "../features/story/AllHotStoriesWithPagination";
+import AllLoveStoriesWithPagination from "../features/story/AllLoveStoriesWithPagination";
+import AllSearchStories from "../features/story/AllSearchStories";
+import AllStoriesWithPagination from "../features/story/AllStoriesWithPagination";
 
-import AllHotStoriesWithPagination from "../components/AllHotStoriesWithPagination";
-import AllLoveStoriesWithPagination from "../components/AllLoveStoriesWithPagination";
-import AllSearchStories from "../components/AllSearchStories";
 // import AuthRequire from "./AuthRequire";
 
 function Router() {
@@ -43,14 +42,6 @@ function Router() {
           element={
             <SubRequire>
               <CreateStoryAndChapterPage />
-            </SubRequire>
-          }
-        />
-        <Route
-          path="/story/create/chapter"
-          element={
-            <SubRequire>
-              <ChapterCreate />
             </SubRequire>
           }
         />
