@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { deleteChapter } from "./chapterSlice";
 
 import ChapterCreate from "./ChapterCreate";
+import { BASE_URL2 } from "../../app/config";
 
 function ChapterEdit({ chapter, loading, error, storyEditing }) {
   const navigate = useNavigate();
@@ -70,7 +71,7 @@ function ChapterEdit({ chapter, loading, error, storyEditing }) {
                                     width: 150,
                                     height: 150,
                                   }}
-                                  src={chapter?.avatar}
+                                  src={`${BASE_URL2}${chapter?.avatar[0]}`}
                                   alt="chapter"
                                 />
                                 <Box>

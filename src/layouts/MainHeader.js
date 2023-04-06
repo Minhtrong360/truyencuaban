@@ -121,33 +121,6 @@ function MainHeader() {
             Đăng xuất
           </MenuItem>
           <Divider sx={{ borderStyle: "dashed" }} />
-          <Box
-            sx={{
-              display: "flex",
-              width: "100%",
-              alignItems: "center",
-              justifyContent: "center",
-              bgcolor: "background.default",
-              color: "text.primary",
-              borderRadius: 1,
-              p: 1,
-            }}
-          >
-            {theme.palette.mode.charAt(0).toUpperCase() +
-              theme.palette.mode.slice(1)}{" "}
-            mode
-            <IconButton
-              sx={{ ml: 1 }}
-              onClick={colorMode.toggleColorMode}
-              color="inherit"
-            >
-              {theme.palette.mode === "dark" ? (
-                <Brightness7Icon />
-              ) : (
-                <Brightness4Icon />
-              )}
-            </IconButton>
-          </Box>
         </Box>
       ) : (
         <Button
@@ -160,6 +133,33 @@ function MainHeader() {
           Đăng nhập
         </Button>
       )}
+      <Box
+        sx={{
+          display: "flex",
+          width: "100%",
+          alignItems: "center",
+          justifyContent: "center",
+          bgcolor: "background.default",
+          color: "text.primary",
+          borderRadius: 1,
+          p: 1,
+        }}
+      >
+        {theme.palette.mode.charAt(0).toUpperCase() +
+          theme.palette.mode.slice(1)}{" "}
+        mode
+        <IconButton
+          sx={{ ml: 1 }}
+          onClick={colorMode.toggleColorMode}
+          color="inherit"
+        >
+          {theme.palette.mode === "dark" ? (
+            <Brightness7Icon />
+          ) : (
+            <Brightness4Icon />
+          )}
+        </IconButton>
+      </Box>
     </Menu>
   );
 

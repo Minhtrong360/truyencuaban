@@ -12,6 +12,7 @@ import apiService2 from "../app/apiService2";
 
 import { getChaptersOfStory } from "../features/chapter/chapterSlice";
 import ChapterEdit from "../features/chapter/ChapterEdit";
+import StoryCreate from "../features/story/StoryCreate";
 
 function EditStoryAndChapterPage() {
   const [story, setStory] = useState([]);
@@ -88,7 +89,7 @@ function EditStoryAndChapterPage() {
                       justifyContent: "center",
                     }}
                   >
-                    <StoryEdit story={story} isLoading={loading} />
+                    <StoryEdit story={story} />
                   </Box>
 
                   <Grid item xs={6} md={4} lg={12}>

@@ -41,7 +41,7 @@ function StoriesList({ stories, noSlide }) {
             transform: "translateX(0%)",
           }}
         >
-          <StoryCard story={story} />
+          <StoryCard story={story} key={index} />
         </Grid>
       ))}
     </Grid>

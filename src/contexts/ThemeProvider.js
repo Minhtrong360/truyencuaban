@@ -33,7 +33,7 @@ const SUCCESS = {
 };
 
 function ThemeProvider({ children }) {
-  const [mode, setMode] = useState("light");
+  const [mode, setMode] = useState("dark");
 
   const themeOptions = {
     palette: {

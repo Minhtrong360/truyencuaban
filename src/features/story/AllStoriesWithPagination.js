@@ -16,13 +16,15 @@ function AllStoriesWithPagination() {
   const [page, setPage] = useState(1);
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getStories({ page: 1, limit: 10000000000 }));
-  }, [dispatch]);
-
   const params = useParams();
   const genres = params.genres.replace(/:/g, "");
+
+  useEffect(() => {
+    if (params.genres) {
+      setPage(1);
+      dispatch(getStories({ page: 1, limit: 10000000000 }));
+    }
+  }, [dispatch, params.genres]);
 
   let storiesWithGenres = AllStories.filter((story) =>
     story.genres.toLowerCase().includes(genres.toLowerCase())

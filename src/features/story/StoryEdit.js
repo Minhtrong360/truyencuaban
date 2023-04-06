@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Box, Grid, Card, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
@@ -7,19 +7,24 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, FTextField, FUploadAvatar } from "../../components/form";
 import { fData } from "../../utils/numberFormat";
-import { useDispatch } from "react-redux";
-import { updateStory } from "./storySlice";
+import { useDispatch, useSelector } from "react-redux";
+import { createStory, updateStory } from "./storySlice";
+
+import { useState } from "react";
 import { BASE_URL2 } from "../../app/config";
+import { cloudinaryUpload } from "../../utils/cloudinary";
 
 const UpdateStorySchema = yup.object().shape({
   title: yup.string().required("Title is required"),
   authorName: yup.string().required("Author's name is required"),
   genres: yup.string().required("Genres is required"),
-  // cover: yup.string().required("Avatar is required"),
+  cover: yup.mixed().required("Avatar is required"),
   summarize: yup.string().required("Summarize is required"),
 });
 
-function StoryEdit({ story, isLoading }) {
+function StoryEdit({ story }) {
+  const { isLoading } = useSelector((state) => state.story);
+
   const defaultValues = {
     title: story?.title || "",
     authorName: story?.authorName || "",
@@ -27,40 +32,38 @@ function StoryEdit({ story, isLoading }) {
     genres: story?.genres || "",
     minimumAge: story?.minimumAge || "",
     summarize: story?.summarize || "",
-    cover: `${BASE_URL2}${story?.cover[0]}` || "",
+    cover: `${BASE_URL2}${story?.cover}` || "",
   };
 
   const methods = useForm({
     resolver: yupResolver(UpdateStorySchema),
     defaultValues,
   });
+
   const {
     setValue,
     handleSubmit,
-
+    reset,
     formState: { isSubmitting },
   } = methods;
 
-  const dispatch = useDispatch();
-
   const handleDrop = useCallback(
     (acceptedFiles) => {
-      const file = acceptedFiles[0];
+      const contentFiles = acceptedFiles.map((file) =>
+        Object.assign(file, {
+          preview: URL.createObjectURL(file),
+        })
+      );
 
-      if (file) {
-        setValue(
-          "cover",
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        );
-      }
+      setValue("cover", contentFiles[0]);
     },
     [setValue]
   );
-
+  const dispatch = useDispatch();
   const onSubmit = (data) => {
-    dispatch(updateStory({ storyId: story._id }, { data }));
+    data.storyId = story._id;
+
+    dispatch(updateStory(data));
   };
 
   return (
@@ -107,7 +110,7 @@ function StoryEdit({ story, isLoading }) {
               <FTextField name="title" label="Tiêu đề" />
               <FTextField name="authorName" label="Tác giả" />
 
-              <FTextField name="artist" label="Họa sĩ" />
+              <FTextField name="artist" label="Họa sỹ" />
               <FTextField name="genres" label="Thể loại" />
 
               <FTextField name="minimumAge" label="Tuổi tối thiểu" />

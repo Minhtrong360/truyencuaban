@@ -172,17 +172,12 @@ export const updateChapter =
         content: imageContent,
         avatar: imageUrl,
       };
-      console.log(
-        "update chapter trong ChapterSlice:",
-        chapterId,
-        "+ udatedata:",
-        updateData
-      );
+
       const response = await apiService2.put(`/chapters/${chapterId}`, {
         updateData,
       });
       const storyId = response.data.data.ofStory._id;
-      dispatch(slice.actions.updateChapterSuccess(response.data.data));
+      await dispatch(slice.actions.updateChapterSuccess(response.data.data));
 
       toast.success("Update Story Successfully");
 

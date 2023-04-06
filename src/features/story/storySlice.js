@@ -244,7 +244,7 @@ export const createStory =
     // try {
 
     const imageUrl = await cloudinaryUpload([cover]);
-    console.log("imageUrl server gửi về ", imageUrl);
+
     await apiService2
       .post("/stories", {
         title,
@@ -288,27 +288,27 @@ export const deleteStory =
     }
   };
 
-export const updateStory =
-  ({ storyId }, { data }) =>
-  async (dispatch) => {
-    dispatch(slice.actions.startLoading());
-    try {
-      if (data?.cover instanceof File) {
-        const imageUrl = await cloudinaryUpload(data.cover);
-        data.cover = imageUrl;
-      }
-      const response = await apiService2.put(`/stories/${storyId}`, { data });
+export const updateStory = (data) => async (dispatch) => {
+  dispatch(slice.actions.startLoading());
 
-      dispatch(slice.actions.updateStorySuccess(response.data.data));
+  try {
+    const imageUrl = await cloudinaryUpload([data.cover]);
+    data.cover = imageUrl[0];
 
-      toast.success("Update Story Successfully");
+    const response = await apiService2.put(`/stories/${data.storyId}`, {
+      data,
+    });
 
-      // dispatch(getStories());
-    } catch (error) {
-      dispatch(slice.actions.hasError(error));
-      toast.error(error);
-    }
-  };
+    dispatch(slice.actions.updateStorySuccess(response.data.data));
+
+    toast.success("Update Story Successfully");
+
+    // dispatch(getStories());
+  } catch (error) {
+    dispatch(slice.actions.hasError(error));
+    toast.error(error);
+  }
+};
 
 export const updateReactionStory =
   ({ storyId }, { data }) =>

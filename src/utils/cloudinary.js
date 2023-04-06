@@ -14,7 +14,7 @@ export const cloudinaryUpload = async (images) => {
     const response = await apiService2.post(`/api/uploadImages`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
-    console.log("response server gửi về khi up ảnh", response.data);
+
     const imageUrls = response.data.imageUrls;
 
     return imageUrls;

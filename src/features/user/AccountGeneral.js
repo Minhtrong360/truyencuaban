@@ -170,7 +170,17 @@ function AccountGeneral() {
           </Grid>
         </Grid>
       )}
-      {!user && <LoadingScreen />}
+      {!user && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <LoadingScreen />
+        </Box>
+      )}
     </FormProvider>
   );
 }

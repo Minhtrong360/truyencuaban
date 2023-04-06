@@ -75,7 +75,6 @@ function StoryCreate({ isCreating, setIsCreating }) {
   }, [status, error]);
 
   const onSubmit = (data) => {
-    console.log("data gửi về server", data);
     dispatch(createStory(data));
     setStatus("started");
   };
