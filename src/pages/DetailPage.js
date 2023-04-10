@@ -33,7 +33,6 @@ import {
 import { updateLovedStory } from "../features/user/userSlice";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
-import { BASE_URL2 } from "../app/config";
 import ChapterGeneral from "../features/chapter/ChapterGeneral";
 
 const TabsWrapperStyle = styled("div")(({ theme }) => ({
@@ -42,7 +41,7 @@ const TabsWrapperStyle = styled("div")(({ theme }) => ({
   width: "100%",
   display: "flex",
   position: "absolute",
-  backgroundColor: "black",
+
   [theme.breakpoints.up("sm")]: {
     justifyContent: "center",
   },
@@ -235,7 +234,7 @@ function DetailPage() {
                                   height: 400,
                                   marginRight: 3,
                                 }}
-                                src={`${BASE_URL2}${story?.cover}`}
+                                src={story?.cover}
                                 alt={story?.title}
                               />
                               <Box>
@@ -400,6 +399,7 @@ function DetailPage() {
                             value={tab.value}
                             icon={tab.icon}
                             label={tab.value.toUpperCase()}
+                            color="#fff !important"
                           />
                         ))}
                       </Tabs>

@@ -17,7 +17,6 @@ import MenuItem from "@mui/material/MenuItem";
 import { Link, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import SearchInput from "../components/SearchInput";
-import { BASE_URL2 } from "../app/config";
 import { useTheme } from "@emotion/react";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
@@ -225,7 +224,7 @@ function MainHeader() {
           <Box sx={{ marginLeft: 5 }}>
             <Avatar
               onClick={handleProfileMenuOpen}
-              src={`${BASE_URL2}${auth?.user?.cover}`}
+              src={auth?.user?.cover}
               alt={auth?.user?.username}
               sx={{ width: 52, height: 52 }}
             />

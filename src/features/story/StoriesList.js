@@ -15,6 +15,9 @@ function StoriesList({ stories, noSlide }) {
   }, [currentIndex]);
 
   let displayItems;
+  if (stories.length < 5) {
+    displayItems = stories;
+  }
   if (!noSlide) {
     displayItems = [
       stories[currentIndex % stories.length],

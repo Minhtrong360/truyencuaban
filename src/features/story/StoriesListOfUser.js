@@ -9,38 +9,56 @@ import LoadingScreen from "../../components/LoadingScreen";
 
 function StoriesListOfUser() {
   const auth = useAuth();
-  const userId = auth.user._id;
+  const userId = auth?.user._id;
   const [page, setPage] = useState(1);
   const { storiesOfUser, isLoading } = useSelector((state) => state.story);
+  const [storiesOfUserFake, setStoriesOfUserFake] = useState(storiesOfUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getStoriesOfUser({ limit: 10000, userId }));
-  }, [dispatch, userId]);
+    if (storiesOfUserFake.length === 0) {
+      dispatch(getStoriesOfUser({ limit: 10000, userId }));
+      setStoriesOfUserFake(storiesOfUser);
+    }
+  }, [storiesOfUser]);
 
   useEffect(() => {
     window.scrollTo(0, 0); // scroll to top
   }, [page]);
 
   const offset = 8 * (page - 1);
-  let storiesWithPagination = storiesOfUser.slice(offset, offset + 8);
-  console.log({ storiesOfUser });
+  let storiesWithPagination = storiesOfUserFake.slice(offset, offset + 8);
+  console.log("storiesOfUser", storiesOfUserFake);
+
   return (
     <Box sx={{ position: "relative", height: 1 }}>
       {isLoading ? (
         <LoadingScreen />
       ) : (
-        <Box sx={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-          {storiesOfUser.length > 0 ? (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "2rem",
+          }}
+        >
+          {storiesOfUserFake.length > 0 ? (
             <>
               {storiesWithPagination.map((story) => (
-                <StoryCard key={story?._id} story={story} userId={userId} />
+                <StoryCard
+                  key={story?._id}
+                  story={story}
+                  userId={userId}
+                  setPage={setPage}
+                  setStoriesOfUserFake={setStoriesOfUserFake}
+                  storiesOfUserFake={storiesOfUserFake}
+                />
               ))}
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <ClickableLinkChips
                   page={page}
                   setPage={setPage}
-                  stories={storiesOfUser}
+                  stories={storiesOfUserFake}
                 />
               </Box>
             </>

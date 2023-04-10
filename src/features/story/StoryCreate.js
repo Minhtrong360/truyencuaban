@@ -75,6 +75,7 @@ function StoryCreate({ isCreating, setIsCreating }) {
   }, [status, error]);
 
   const onSubmit = (data) => {
+    console.log("onSubmit", data);
     dispatch(createStory(data));
     setStatus("started");
   };

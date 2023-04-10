@@ -7,15 +7,36 @@ import { LoadingButton } from "@mui/lab";
 import { useDispatch } from "react-redux";
 
 import { deleteStory } from "./storySlice";
-import { BASE_URL2 } from "../../app/config";
 import StoryGenenal from "./StoryGeneral";
 
-function StoryCard({ story, userId }) {
+function StoryCard({
+  story,
+  userId,
+  setPage,
+  storiesOfUserFake,
+  setStoriesOfUserFake,
+}) {
   const dispatch = useDispatch();
 
   const [isEditing, setIsEditing] = useState(false);
 
   const navigate = useNavigate();
+
+  const handleDeleteStory = async () => {
+    await dispatch(deleteStory({ storyId: story._id, userId }));
+
+    setStoriesOfUserFake((prevStories) =>
+      prevStories.filter((s) => s._id !== story._id)
+    );
+    const numStories = storiesOfUserFake?.length - 1; // Subtract 1 for the deleted story
+    const elementsPerPage = 8;
+    const newPageNumber = Math.ceil(numStories / elementsPerPage);
+    console.log("numStories", numStories);
+    console.log("newPageNumber", newPageNumber);
+
+    // Set the new page number
+    setPage(newPageNumber);
+  };
 
   // const handleProfileMenuOpen = (event) => {
   //   setAnchorEl(event.currentTarget);
@@ -74,6 +95,7 @@ function StoryCard({ story, userId }) {
                   display: "flex",
                   flexDirection: "row",
                   position: "relative",
+                  alignItems: "center",
                 }}
               >
                 <Box
@@ -82,7 +104,7 @@ function StoryCard({ story, userId }) {
                     width: 250,
                     height: 350,
                   }}
-                  src={`${BASE_URL2}${story?.cover}`}
+                  src={story?.cover}
                   alt="story"
                 />
                 <Box>
@@ -185,9 +207,7 @@ function StoryCard({ story, userId }) {
                     right: 0,
                     top: 0,
                   }}
-                  onClick={() =>
-                    dispatch(deleteStory({ storyId: story._id, userId }))
-                  }
+                  onClick={handleDeleteStory}
                 >
                   Delete
                 </LoadingButton>

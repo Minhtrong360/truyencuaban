@@ -32,7 +32,7 @@ function StoryEdit({ story }) {
     genres: story?.genres || "",
     minimumAge: story?.minimumAge || "",
     summarize: story?.summarize || "",
-    cover: `${BASE_URL2}${story?.cover}` || "",
+    cover: story?.cover || "",
   };
 
   const methods = useForm({

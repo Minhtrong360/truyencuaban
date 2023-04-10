@@ -19,7 +19,6 @@ import LoadingScreen from "../../components/LoadingScreen";
 
 import ChatBox from "../../components/ChatBox";
 import { styled } from "@mui/material/styles";
-import { BASE_URL2 } from "../../app/config";
 
 function ChapterContent() {
   const [chapter, setChapter] = useState(null);
@@ -57,7 +56,7 @@ function ChapterContent() {
   useEffect(() => {
     if (chapter?.ofStory?._id)
       dispatch(getChaptersOfStory({ storyId: chapter?.ofStory?._id }));
-  }, [chapter]);
+  }, [dispatch, chapter]);
 
   const toggleShowChapters = () => {
     setShowChapters(!showChapters);
@@ -122,7 +121,7 @@ function ChapterContent() {
               {chapter?.content?.map((file) => (
                 <img
                   key={file}
-                  src={`${BASE_URL2}${file}`}
+                  src={file}
                   alt="preview"
                   style={{
                     maxWidth: "100%",

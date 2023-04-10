@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Alert,
   Box,
@@ -11,13 +11,11 @@ import {
 import LoadingScreen from "../../components/LoadingScreen";
 
 import StoriesList from "../story/StoriesList";
-import { useDispatch, useSelector } from "react-redux";
-import { getStories } from "./storySlice";
+
 import { useNavigate } from "react-router-dom";
 
-function StoriesWithGenres({ genres }) {
-  const { AllStories, isLoading, error } = useSelector((state) => state.story);
-
+function StoriesWithGenres({ AllStories, genres, isLoading, error }) {
+  const navigate = useNavigate();
   let storiesWithGenres = AllStories.filter((story) =>
     story.genres.toLowerCase().includes(genres.toLowerCase())
   );
@@ -29,14 +27,6 @@ function StoriesWithGenres({ genres }) {
       ),
     ];
   }
-
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getStories({ page: 1, limit: 1000 }));
-  }, [dispatch]);
-
   return (
     <Container sx={{ display: "flex", mt: 3, height: "40rem" }}>
       <Stack sx={{ flexGrow: 1 }}>

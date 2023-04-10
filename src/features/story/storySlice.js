@@ -28,10 +28,6 @@ const slice = createSlice({
     hasError(state, action) {
       state.isLoading = false;
       state.error = action.payload;
-      console.log(
-        "state.error = action.payload in storySlice:",
-        action.payload
-      );
     },
 
     resetStories(state, action) {
@@ -266,9 +262,9 @@ export const createStory =
   };
 
 export const deleteStory =
-  ({ storyId, userId, page = 1, limit = POSTS_PER_PAGE }) =>
+  ({ storyId, userId, page = 1, limit = STORIES_PER_PAGE }) =>
   async (dispatch) => {
-    dispatch(slice.actions.startLoading());
+    // dispatch(slice.actions.startLoading());
     try {
       let text = "Do you want to delete it?";
       if (window.confirm(text) === true) {
@@ -281,7 +277,7 @@ export const deleteStory =
         dispatch(slice.actions.removeStoryNotSuccess());
       }
 
-      dispatch(getStoriesOfUser({ userId }));
+      // dispatch(getStoriesOfUser({ userId, page, limit }));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
       toast.error(error);

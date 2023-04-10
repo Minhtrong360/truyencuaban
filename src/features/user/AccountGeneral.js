@@ -30,7 +30,7 @@ function AccountGeneral() {
   const defaultValues = {
     name: user?.name || "",
     email: user?.email || "",
-    cover: `${BASE_URL2}${user?.cover}` || "",
+    cover: user?.cover || "",
     gender: user?.gender || "Male",
     birthday: user?.birthday?.slice(0, 10) || "",
     // timeRegister: user?.subscription?.isSubscription

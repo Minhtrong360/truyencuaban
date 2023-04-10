@@ -14,7 +14,6 @@ import CommentReaction from "./CommentReaction";
 
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import CommentForm from "./CommentForm";
-import { BASE_URL2 } from "../../app/config";
 
 function CommentCard({ comment, onDelete, storyId, chapterId }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -69,10 +68,7 @@ function CommentCard({ comment, onDelete, storyId, chapterId }) {
 
   return (
     <Stack direction="row" spacing={2}>
-      <Avatar
-        alt={comment?.author?.name}
-        src={`${BASE_URL2}${comment?.author?.cover}`}
-      />
+      <Avatar alt={comment?.author?.name} src={comment?.author?.cover} />
 
       <Paper sx={{ p: 1.5, flexGrow: 1, bgcolor: "background.neutral" }}>
         <Stack

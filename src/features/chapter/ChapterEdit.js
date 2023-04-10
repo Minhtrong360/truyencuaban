@@ -1,16 +1,11 @@
 import { useState } from "react";
 import { Card, Grid, Container, Typography, Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
 import LoadingScreen from "../../components/LoadingScreen";
 import { Alert } from "@mui/material";
-
 import { useDispatch } from "react-redux";
-
 import { deleteChapter } from "./chapterSlice";
-
 import ChapterCreate from "./ChapterCreate";
-import { BASE_URL2 } from "../../app/config";
 
 function ChapterEdit({ chapter, loading, error, storyEditing }) {
   const navigate = useNavigate();
@@ -71,7 +66,7 @@ function ChapterEdit({ chapter, loading, error, storyEditing }) {
                                     width: 150,
                                     height: 150,
                                   }}
-                                  src={`${BASE_URL2}${chapter?.avatar[0]}`}
+                                  src={chapter?.avatar[0]}
                                   alt="chapter"
                                 />
                                 <Box>

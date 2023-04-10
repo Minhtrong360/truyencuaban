@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 import { LoadingButton } from "@mui/lab";
 
-import { BASE_URL2 } from "../../app/config";
 import StoryGenenal from "./StoryGeneral";
 
 function LovedStoryCard({ story, userId }) {
@@ -37,7 +36,7 @@ function LovedStoryCard({ story, userId }) {
                     width: 250,
                     height: 350,
                   }}
-                  src={`${BASE_URL2}${story?.cover}`}
+                  src={story?.cover}
                   alt="story"
                 />
                 <Box>
