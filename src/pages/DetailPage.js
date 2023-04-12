@@ -10,7 +10,7 @@ import {
   Button,
   IconButton,
 } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import apiService2 from "../app/apiService2";
 import LoadingScreen from "../components/LoadingScreen";
@@ -32,7 +32,7 @@ import {
 } from "../features/story/storySlice";
 import { updateLovedStory } from "../features/user/userSlice";
 import useAuth from "../hooks/useAuth";
-import { toast } from "react-toastify";
+
 import ChapterGeneral from "../features/chapter/ChapterGeneral";
 
 const TabsWrapperStyle = styled("div")(({ theme }) => ({
@@ -57,6 +57,7 @@ function DetailPage() {
   const [error, setError] = useState("");
   const params = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { story, isLoading } = useSelector((state) => state.story);
 
   const { user } = useAuth();
@@ -69,23 +70,35 @@ function DetailPage() {
 
   const handleClickLike = async (e) => {
     e.preventDefault();
-    dispatch(updateReactionStory({ storyId: story._id }, { data: "like" }));
+    if (!user) {
+      navigate("/login");
+    } else {
+      dispatch(updateReactionStory({ storyId: story._id }, { data: "like" }));
+    }
   };
   const handleClickDisLike = async (e) => {
     e.preventDefault();
-    dispatch(updateReactionStory({ storyId: story._id }, { data: "disLike" }));
+    console.log("handleClickDisLike");
+    if (!user) {
+      navigate("/login");
+    } else {
+      dispatch(
+        updateReactionStory({ storyId: story._id }, { data: "disLike" })
+      );
+    }
   };
 
   const handleLoveStory = () => {
     if (!user) {
-      return toast.error("Login Required");
+      navigate("/login");
     } else {
+      console.log("user");
       dispatch(updateLovedStory({ userId: user?._id, lovedStory: story?._id }));
     }
   };
 
   const lovedStory = user?.lovedStory?.find(
-    (storyLoved) => storyLoved == story?._id
+    (storyLoved) => storyLoved === story?._id
   );
   useEffect(() => {
     if (params.id) {

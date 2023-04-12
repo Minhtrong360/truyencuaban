@@ -29,11 +29,6 @@ function AccountPage() {
       icon: <MenuBookIcon sx={{ fontSize: 30, marginTop: 4 }} />,
       component: <StoriesListOfUser />,
     },
-    {
-      value: "truyện yêu thích",
-      icon: <VolunteerActivismIcon sx={{ fontSize: 30, marginTop: 4 }} />,
-      component: <LovedStoriesListOfUser />,
-    },
   ];
 
   return (

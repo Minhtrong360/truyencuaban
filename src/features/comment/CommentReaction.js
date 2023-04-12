@@ -4,12 +4,18 @@ import ThumbUpRoundedIcon from "@mui/icons-material/ThumbUpRounded";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { updateReactionComment } from "./commentSlice";
+import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 function CommentReaction({ comment }) {
   const dispatch = useDispatch();
-  // toask: lam sao de hien reaction lien`
-  // toanswer:  viết 1 hàm chứa data ảo để cập nhật lượt like trên FE
+  const auth = useAuth();
+  const navigate = useNavigate();
+
   const handleClick = (emoji) => {
+    if (!auth?.user) {
+      navigate("../../login");
+    }
     dispatch(updateReactionComment({ commentId: comment._id, emoji }));
   };
 

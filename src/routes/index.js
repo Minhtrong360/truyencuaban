@@ -23,6 +23,7 @@ import AllHotStoriesWithPagination from "../features/story/AllHotStoriesWithPagi
 import AllLoveStoriesWithPagination from "../features/story/AllLoveStoriesWithPagination";
 import AllSearchStories from "../features/story/AllSearchStories";
 import AllStoriesWithPagination from "../features/story/AllStoriesWithPagination";
+import LovedStoriesListOfUser from "../features/story/LovedStoriesListOfUser";
 
 // import AuthRequire from "./AuthRequire";
 
@@ -55,6 +56,7 @@ function Router() {
           path="stories/love-stories"
           element={<AllLoveStoriesWithPagination />}
         />
+        <Route path="favorite" element={<LovedStoriesListOfUser />} />
 
         <Route path="/login" element={<LoginPage />} />
         {/* toask: tại sao LoginPage k nằm trong AuthRequire mà vẫn xài useLocation được */}

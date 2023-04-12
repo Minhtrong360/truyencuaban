@@ -15,6 +15,7 @@ function StoryCard({
   setPage,
   storiesOfUserFake,
   setStoriesOfUserFake,
+  page,
 }) {
   const dispatch = useDispatch();
 
@@ -22,8 +23,8 @@ function StoryCard({
 
   const navigate = useNavigate();
 
-  const handleDeleteStory = async () => {
-    await dispatch(deleteStory({ storyId: story._id, userId }));
+  const handleDeleteStory = () => {
+    dispatch(deleteStory({ storyId: story._id, userId }));
 
     setStoriesOfUserFake((prevStories) =>
       prevStories.filter((s) => s._id !== story._id)
@@ -31,56 +32,12 @@ function StoryCard({
     const numStories = storiesOfUserFake?.length - 1; // Subtract 1 for the deleted story
     const elementsPerPage = 8;
     const newPageNumber = Math.ceil(numStories / elementsPerPage);
-    console.log("numStories", numStories);
-    console.log("newPageNumber", newPageNumber);
 
     // Set the new page number
-    setPage(newPageNumber);
+    if (page === newPageNumber + 1) {
+      setPage(newPageNumber);
+    }
   };
-
-  // const handleProfileMenuOpen = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
-
-  // const handleMenuClose = () => {
-  //   setAnchorEl(null);
-  // };
-  // const handleDelete = () => {
-  //   setAnchorEl(null);
-
-  //   dispatch(deletePost({ postId: post._id, userId }));
-  // };
-  // const handleEdit = () => {
-  //   setAnchorEl(null);
-  //   setIsEdit(true);
-  // };
-
-  // const menuId = "primary-search-account-menu";
-  // const renderMenu = (
-  //   <Menu
-  //     anchorEl={anchorEl}
-  //     anchorOrigin={{
-  //       vertical: "bottom",
-  //       horizontal: "right",
-  //     }}
-  //     id={menuId}
-  //     keepMounted
-  //     transformOrigin={{
-  //       vertical: "top",
-  //       horizontal: "right",
-  //     }}
-  //     open={isMenuOpen}
-  //     onClose={handleMenuClose}
-  //   >
-  //     <MenuItem onClick={handleEdit} sx={{ mx: 1 }}>
-  //       Edit
-  //     </MenuItem>
-
-  //     <MenuItem onClick={handleDelete} sx={{ mx: 1 }}>
-  //       Delete
-  //     </MenuItem>
-  //   </Menu>
-  // );
 
   return (
     <Card>

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
 import apiService2 from "../../app/apiService2";
-import { POSTS_PER_PAGE } from "../../app/config";
+
 import { STORIES_PER_PAGE } from "../../app/config";
 import { cloudinaryUpload } from "../../utils/cloudinary";
 
@@ -31,8 +31,7 @@ const slice = createSlice({
     },
 
     resetStories(state, action) {
-      state.postsById = {};
-      state.currentPageStories = [];
+      state.lovedStoriesOfUser = [];
     },
 
     getStoriesSuccess(state, action) {
@@ -74,7 +73,7 @@ const slice = createSlice({
       state.isLoading = false;
       state.error = null;
 
-      const { stories, count } = action.payload;
+      const { stories, totalPages, count } = action.payload;
 
       // story.forEach((story) => {
       //   state.storiesById[story._id] = story;
@@ -83,6 +82,7 @@ const slice = createSlice({
       // }) ;  todo
       state.lovedStoriesOfUser = stories;
       state.totalStories = count; // toask: add totalStories?
+      state.totalPages = totalPages;
     },
     getAllStoriesSuccess(state, action) {
       state.isLoading = false;
@@ -158,11 +158,12 @@ export const getLovedStoriesOfUser =
     dispatch(slice.actions.startLoading());
     try {
       const params = { page, limit };
+      if (page === 1) dispatch(slice.actions.resetStories());
       const response = await apiService2.get(`/stories/user/${userId}/loved`, {
         params,
       });
+      console.log("getLovedStoriesOfUser", response.data.data);
 
-      if (page === 1) dispatch(slice.actions.resetStories());
       dispatch(slice.actions.getLovedStoriesOfUserSuccess(response.data.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
@@ -316,6 +317,6 @@ export const updateReactionStory =
       dispatch(slice.actions.sendStoryReactionSuccess(response.data.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
-      toast.error(error);
+      // toast.error(error);
     }
   };

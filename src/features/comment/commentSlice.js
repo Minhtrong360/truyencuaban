@@ -283,6 +283,6 @@ export const updateReactionComment =
       );
     } catch (error) {
       dispatch(slice.actions.hasError(error));
-      toast.error(error);
+      // toast.error(error);
     }
   };

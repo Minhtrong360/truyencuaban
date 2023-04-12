@@ -105,6 +105,15 @@ function MainHeader() {
           >
             Đăng ký
           </MenuItem>
+
+          <MenuItem
+            onClick={handleMenuClose}
+            to="/favorite"
+            component={Link}
+            sx={{ mx: 1 }}
+          >
+            Yêu thích
+          </MenuItem>
           <MenuItem
             onClick={handleMenuClose}
             to="/story/create"
@@ -206,7 +215,7 @@ function MainHeader() {
               sx={{
                 cursor: "pointer",
                 marginLeft: 5,
-                "&:hover": { color: "black" },
+                "&:hover": { color: "orange" },
               }}
               onClick={item.onClick}
             >

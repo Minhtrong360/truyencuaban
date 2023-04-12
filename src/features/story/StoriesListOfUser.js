@@ -16,11 +16,9 @@ function StoriesListOfUser() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (storiesOfUserFake.length === 0) {
-      dispatch(getStoriesOfUser({ limit: 10000, userId }));
-      setStoriesOfUserFake(storiesOfUser);
-    }
-  }, [storiesOfUser]);
+    dispatch(getStoriesOfUser({ limit: 10000, userId }));
+    setStoriesOfUserFake(storiesOfUser);
+  }, [dispatch, storiesOfUser.length]);
 
   useEffect(() => {
     window.scrollTo(0, 0); // scroll to top
@@ -28,7 +26,6 @@ function StoriesListOfUser() {
 
   const offset = 8 * (page - 1);
   let storiesWithPagination = storiesOfUserFake.slice(offset, offset + 8);
-  console.log("storiesOfUser", storiesOfUserFake);
 
   return (
     <Box sx={{ position: "relative", height: 1 }}>
@@ -49,6 +46,7 @@ function StoriesListOfUser() {
                   key={story?._id}
                   story={story}
                   userId={userId}
+                  page={page}
                   setPage={setPage}
                   setStoriesOfUserFake={setStoriesOfUserFake}
                   storiesOfUserFake={storiesOfUserFake}
