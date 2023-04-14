@@ -24,6 +24,8 @@ import AllLoveStoriesWithPagination from "../features/story/AllLoveStoriesWithPa
 import AllSearchStories from "../features/story/AllSearchStories";
 import AllStoriesWithPagination from "../features/story/AllStoriesWithPagination";
 import LovedStoriesListOfUser from "../features/story/LovedStoriesListOfUser";
+import StoryWithAuthorName from "../pages/StoryWithAuthorName";
+import StoryWithArtist from "../pages/StoryWithArtist";
 
 // import AuthRequire from "./AuthRequire";
 
@@ -47,6 +49,8 @@ function Router() {
           }
         />
 
+        <Route path="/author/:authorName" element={<StoryWithAuthorName />} />
+        <Route path="/artist/:artist" element={<StoryWithArtist />} />
         <Route path="stories/:genres" element={<AllStoriesWithPagination />} />
         <Route
           path="stories/hot-stories"

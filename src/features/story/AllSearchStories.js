@@ -25,6 +25,10 @@ function AllSearchStories() {
   let result = AllStories.filter((story) =>
     story.title.toLowerCase().includes(query.toLowerCase())
   );
+  const sortedStories =
+    AllStories.length > 0
+      ? [...AllStories].sort((a, b) => b?.view - a?.view)
+      : [];
 
   const offset = 8 * (page - 1);
   let storiesWithPagination = result.slice(offset, offset + 8);
@@ -64,7 +68,7 @@ function AllSearchStories() {
           ) : (
             <>
               {result.length === 0 && (
-                <h1 style={{ textAlign: "center" }}>Không tìm thấy kết quả</h1>
+                <h2 style={{ textAlign: "center" }}>Không tìm thấy kết quả</h2>
               )}
               {result.length > 0 && (
                 <>
@@ -81,6 +85,20 @@ function AllSearchStories() {
               )}
             </>
           )}
+        </Box>
+        <Box sx={{ position: "relative", height: 1 }}>
+          <Stack>
+            {isLoading ? (
+              <LoadingScreen />
+            ) : (
+              <>
+                <Typography sx={{ fontSize: 30, fontWeight: 800 }} gutterBottom>
+                  CÓ THỂ BẠN SẼ THÍCH?
+                </Typography>
+                <StoriesList stories={sortedStories.slice(0, 20)} />
+              </>
+            )}
+          </Stack>
         </Box>
       </Stack>
     </Container>

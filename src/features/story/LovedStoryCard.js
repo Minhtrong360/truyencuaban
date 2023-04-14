@@ -1,7 +1,17 @@
-import { Card, Grid, Typography, Box } from "@mui/material";
+import { Card, Grid, Typography, Box, Chip } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
 import { LoadingButton } from "@mui/lab";
+import { styled } from "@mui/material/styles";
+
+const StyledLink = styled(Link)(({ theme }) => ({
+  color: theme.palette.text.primary,
+  textDecoration: "none",
+  "&:hover": {
+    color: "orange",
+    textDecoration: "none",
+  },
+}));
 
 function LovedStoryCard({ story }) {
   const navigate = useNavigate();
@@ -60,9 +70,17 @@ function LovedStoryCard({ story }) {
                   sx={{
                     overflow: "auto",
                     textAlign: "justify",
+                    textDecoration: "none",
                   }}
                 >
-                  Author: {story?.authorName}
+                  Author:
+                  {story?.authorName !== "Đang Cập Nhật" ? (
+                    <StyledLink to={`/author/${story?.authorName}`}>
+                      {story?.authorName}
+                    </StyledLink>
+                  ) : (
+                    story?.authorName
+                  )}
                 </Typography>
                 <Typography
                   color="text.primary"
@@ -72,7 +90,14 @@ function LovedStoryCard({ story }) {
                     textAlign: "justify",
                   }}
                 >
-                  Artist: {story?.artist}
+                  Artist:
+                  {story?.artist !== "Đang Cập Nhật" ? (
+                    <StyledLink to={`/artist/${story?.artist}`}>
+                      {story?.artist}
+                    </StyledLink>
+                  ) : (
+                    story?.artist
+                  )}
                 </Typography>
                 <Typography
                   variant="h7"
@@ -84,7 +109,21 @@ function LovedStoryCard({ story }) {
                   }}
                 >
                   Thể loại:
-                  {story?.genres}
+                  {story?.genres?.map((genre) => (
+                    <Chip
+                      key={genre}
+                      label={genre}
+                      component={Link}
+                      to={`/stories/:${genre}`}
+                      sx={{
+                        margin: "0.5rem",
+                        cursor: "pointer",
+                        "&:hover": {
+                          color: "orange", // add color property to change text color on hover
+                        },
+                      }}
+                    />
+                  ))}
                 </Typography>
 
                 <Typography

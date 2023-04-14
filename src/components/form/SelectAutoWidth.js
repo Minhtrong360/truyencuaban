@@ -30,17 +30,23 @@ export default function MultipleSelectPlaceholder() {
     dispatch(getStories({ page: 1, limit: 10000000000 }));
   }, [dispatch]);
 
-  let GenresAllow = [];
-
-  AllStories.forEach((story) => {
-    const genresArr = story.genres.split(", ");
-    genresArr.forEach((genre) => {
-      if (!GenresAllow.includes(genre)) {
-        GenresAllow.push(genre);
-      }
-    });
-  });
-  GenresAllow = GenresAllow.filter((item) => item !== "");
+  let GenresAllow = [
+    "Action",
+    "Adventure",
+    "Chuyển sinh",
+    "Comedy",
+    "Cổ đại",
+    "Drama",
+    "Fantasy",
+    "Manhwa",
+    "Magic",
+    "Mystery",
+    "Ngôn tình",
+    "Thể thao",
+    "Trọng sinh",
+    "Truyện màu",
+    "Xuyên không",
+  ];
 
   return (
     <div>

@@ -23,6 +23,7 @@
     "json-server": "^0.17.0",
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
+    "modal": "^1.2.0",
     "mui": "^0.0.1",
     "numeral": "^2.0.6",
     "react": "^17.0.2",
@@ -64,5 +65,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10"
   }
 }

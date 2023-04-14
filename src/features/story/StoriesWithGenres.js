@@ -17,16 +17,17 @@ import { useNavigate } from "react-router-dom";
 function StoriesWithGenres({ AllStories, genres, isLoading, error }) {
   const navigate = useNavigate();
   let storiesWithGenres = AllStories.filter((story) =>
-    story.genres.toLowerCase().includes(genres.toLowerCase())
+    story.genres
+      .map((genre) => genre.toLowerCase())
+      .includes(genres.toLowerCase())
   );
   if (genres === "hành động") {
     storiesWithGenres = [
       ...storiesWithGenres,
-      ...AllStories.filter((story) =>
-        story.genres.toLowerCase().includes("action")
-      ),
+      ...AllStories.filter((story) => story.genres.includes("Action")),
     ];
   }
+
   return (
     <Container sx={{ display: "flex", mt: 3, height: "40rem" }}>
       <Stack sx={{ flexGrow: 1 }}>
@@ -52,7 +53,7 @@ function StoriesWithGenres({ AllStories, genres, isLoading, error }) {
               alignItems: "center",
             }}
           >
-            <span>{genres.toUpperCase()}</span>
+            <span>{genres?.toUpperCase()}</span>
 
             <Button
               onClick={() => navigate(`stories/:${genres}`)}

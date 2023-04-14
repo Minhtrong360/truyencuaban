@@ -33,8 +33,12 @@ function AccountPage() {
 
   return (
     <Container>
-      <Typography variant="h4" gutterBottom sx={{ my: 3 }}>
-        Tài Khoản
+      <Typography
+        variant="h4"
+        gutterBottom
+        sx={{ my: 3, fontSize: 30, fontWeight: 800 }}
+      >
+        TÀI KHOẢN
       </Typography>
       <Tabs
         value={currentTab}

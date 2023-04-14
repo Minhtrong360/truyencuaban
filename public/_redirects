@@ -11,3 +11,5 @@
 /subscription    /index.html   200
 /chapter/:id    /index.html   200
 /search    /index.html   200
+/authorName/:authorName /index.html   200
+/artist/:artist /index.html   200

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, Grid, Typography, Box } from "@mui/material";
+import { Card, Grid, Typography, Box, Chip } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
 import { LoadingButton } from "@mui/lab";
@@ -112,10 +112,29 @@ function StoryCard({
                     sx={{
                       overflow: "auto",
                       textAlign: "justify",
+                      display: "flex",
+                      flexDirection: "row",
+
+                      alignItems: "center",
+                      marginBottom: "0px !important",
                     }}
                   >
                     Thể loại:
-                    {story?.genres}
+                    {story?.genres?.map((genre) => (
+                      <Chip
+                        key={genre}
+                        label={genre}
+                        component={Link}
+                        to={`/stories/:${genre}`}
+                        sx={{
+                          margin: "0.5rem",
+                          cursor: "pointer",
+                          "&:hover": {
+                            color: "orange", // add color property to change text color on hover
+                          },
+                        }}
+                      />
+                    ))}
                   </Typography>
 
                   <Typography

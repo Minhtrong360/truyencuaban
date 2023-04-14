@@ -9,8 +9,9 @@ import {
   Tab,
   Button,
   IconButton,
+  Chip,
 } from "@mui/material";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import apiService2 from "../app/apiService2";
 import LoadingScreen from "../components/LoadingScreen";
@@ -48,6 +49,15 @@ const TabsWrapperStyle = styled("div")(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
     justifyContent: "center",
     paddingRight: theme.spacing(3),
+  },
+}));
+
+const StyledLink = styled(Link)(({ theme }) => ({
+  color: theme.palette.text.primary,
+  textDecoration: "none",
+  "&:hover": {
+    color: "orange",
+    textDecoration: "none",
   },
 }));
 
@@ -272,11 +282,20 @@ function DetailPage() {
                                   sx={{
                                     overflow: "auto",
                                     textAlign: "justify",
+                                    textDecoration: "none",
                                   }}
                                 >
                                   Tác giả:
                                   <br />
-                                  {story?.authorName}
+                                  {story?.authorName !== "Đang Cập Nhật" ? (
+                                    <StyledLink
+                                      to={`/author/${story?.authorName}`}
+                                    >
+                                      {story?.authorName}
+                                    </StyledLink>
+                                  ) : (
+                                    story?.authorName
+                                  )}
                                 </Typography>
                                 <Typography
                                   color="text.primary"
@@ -287,7 +306,14 @@ function DetailPage() {
                                   }}
                                 >
                                   Họa sĩ:
-                                  <br /> {story?.artist}
+                                  <br />
+                                  {story?.artist !== "Đang Cập Nhật" ? (
+                                    <StyledLink to={`/artist/${story?.artist}`}>
+                                      {story?.artist}
+                                    </StyledLink>
+                                  ) : (
+                                    story?.artist
+                                  )}
                                 </Typography>
                                 <Typography
                                   variant="h7"
@@ -301,7 +327,21 @@ function DetailPage() {
                                 >
                                   Thể loại:
                                   <br />
-                                  {story?.genres}
+                                  {story?.genres?.map((genre) => (
+                                    <Chip
+                                      key={genre}
+                                      label={genre}
+                                      component={Link}
+                                      to={`/stories/:${genre}`}
+                                      sx={{
+                                        margin: "0.5rem",
+                                        cursor: "pointer",
+                                        "&:hover": {
+                                          color: "orange", // add color property to change text color on hover
+                                        },
+                                      }}
+                                    />
+                                  ))}
                                 </Typography>
                                 <Typography
                                   color="text.primary"

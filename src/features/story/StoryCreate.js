@@ -1,8 +1,18 @@
 import React, { useCallback, useEffect } from "react";
-import { Box, Grid, Card, Typography } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Card,
+  Typography,
+  Chip,
+  Autocomplete,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+} from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, FTextField, FUploadAvatar } from "../../components/form";
@@ -15,7 +25,7 @@ import { useState } from "react";
 const UpdateStorySchema = yup.object().shape({
   title: yup.string().required("Title is required"),
   authorName: yup.string().required("Author's name is required"),
-  genres: yup.string().required("Genres is required"),
+  genres: yup.array().required("Genres is required"),
   cover: yup.mixed().required("Avatar is required"),
   summarize: yup.string().required("Summarize is required"),
 });
@@ -87,6 +97,23 @@ function StoryCreate({ isCreating, setIsCreating }) {
     setIsCreating(true);
   };
 
+  let allowGenres = [
+    "Action",
+    "Adventure",
+    "Chuyển sinh",
+    "Comedy",
+    "Cổ đại",
+    "Drama",
+    "Fantasy",
+    "Manhwa",
+    "Magic",
+    "Mystery",
+    "Ngôn tình",
+    "Thể thao",
+    "Trọng sinh",
+    "Truyện màu",
+    "Xuyên không",
+  ];
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3} width="100vh">
@@ -130,9 +157,40 @@ function StoryCreate({ isCreating, setIsCreating }) {
             >
               <FTextField name="title" label="Tiêu đề" />
               <FTextField name="authorName" label="Tác giả" />
-
               <FTextField name="artist" label="Họa sỹ" />
-              <FTextField name="genres" label="Thể loại" />
+
+              {/* Use Autocomplete for genres */}
+              <Autocomplete
+                multiple
+                id="genres"
+                disableCloseOnSelect
+                options={allowGenres}
+                onChange={(event, newValue) => {
+                  setValue("genres", [...newValue]);
+                }}
+                getOptionLabel={(option) => option}
+                renderOption={(props, option, { selected }) => (
+                  <li {...props}>
+                    <FormGroup>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={selected}
+                            color="primary"
+                            value={option}
+                            multiple
+                          />
+                        }
+                        label={option}
+                        multiple
+                      />
+                    </FormGroup>
+                  </li>
+                )}
+                renderInput={(params) => (
+                  <FTextField {...params} name="genres" label="Thể loại" />
+                )}
+              />
 
               <FTextField name="minimumAge" label="Tuổi tối thiểu" />
               <FTextField

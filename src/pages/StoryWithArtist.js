@@ -4,12 +4,13 @@ import { Alert, Box, Container, Stack, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useParams } from "react-router-dom";
-import { getStories } from "./storySlice";
-import StoriesList from "./StoriesList";
-import ClickableLinkChips from "../../components/form/ClickableLinkChips";
-import LoadingScreen from "../../components/LoadingScreen";
 
-function AllStoriesWithPagination() {
+import LoadingScreen from "../components/LoadingScreen";
+import ClickableLinkChips from "../components/form/ClickableLinkChips";
+import { getStories } from "../features/story/storySlice";
+import StoriesList from "../features/story/StoriesList";
+
+function StoryWithArtist() {
   const { AllStories, isLoading, error } = useSelector((state) => state.story);
 
   const noSlide = true;
@@ -17,33 +18,19 @@ function AllStoriesWithPagination() {
 
   const dispatch = useDispatch();
   const params = useParams();
-  const genres = params.genres.replace(/:/g, "");
+  const artist = params.artist;
+  console.log("artist", artist);
 
   useEffect(() => {
-    if (params.genres) {
+    if (params.artist) {
       setPage(1);
       dispatch(getStories({ page: 1, limit: 10000000000 }));
     }
-  }, [dispatch, params.genres]);
+  }, [dispatch, params.artist]);
 
-  let storiesWithGenres = AllStories.filter((story) =>
-    story.genres
-      .map((genre) => genre.toLowerCase())
-      .includes(genres.toLowerCase())
+  let storiesWithGenres = AllStories.filter(
+    (story) => story.artist.toLowerCase() === artist.toLowerCase()
   );
-  if (genres === "hành động") {
-    storiesWithGenres = [
-      ...storiesWithGenres,
-      ...AllStories.filter((story) => story.genres.includes("Action")),
-    ];
-  }
-
-  if (genres === "action") {
-    storiesWithGenres = [
-      ...storiesWithGenres,
-      ...AllStories.filter((story) => story.genres.includes("Hành động")),
-    ];
-  }
 
   const offset = 8 * (page - 1);
   let storiesWithPagination = storiesWithGenres.slice(offset, offset + 8);
@@ -72,7 +59,7 @@ function AllStoriesWithPagination() {
               justifyContent: "space-between",
             }}
           >
-            <span>{genres.toUpperCase()}</span>
+            <span>{artist.toUpperCase()}</span>
           </Typography>
         </Stack>
 
@@ -102,4 +89,4 @@ function AllStoriesWithPagination() {
   );
 }
 
-export default AllStoriesWithPagination;
+export default StoryWithArtist;

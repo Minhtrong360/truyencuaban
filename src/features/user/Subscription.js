@@ -64,9 +64,7 @@ function Subscription() {
   };
 
   const handleClickCancel = async () => {
-    const from = location.state?.from?.pathname || "/"; //toask: k luu dc location
-
-    navigate(from, { replace: true });
+    navigate("/");
   };
 
   return (
