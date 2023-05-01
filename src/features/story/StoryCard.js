@@ -16,6 +16,7 @@ function StoryCard({
   storiesOfUserFake,
   setStoriesOfUserFake,
   page,
+  admin,
 }) {
   const dispatch = useDispatch();
 
@@ -160,20 +161,21 @@ function StoryCard({
                     Summarize: {story?.summarize}
                   </Typography>
                 </Box>
-
-                <LoadingButton
-                  type="submit"
-                  variant="contained"
-                  sx={{
-                    borderRadius: "30px",
-                    position: "absolute",
-                    right: 100,
-                    top: 0,
-                  }}
-                  onClick={() => navigate(`editstory/${story._id}`)}
-                >
-                  Edit
-                </LoadingButton>
+                {!admin && (
+                  <LoadingButton
+                    type="submit"
+                    variant="contained"
+                    sx={{
+                      borderRadius: "30px",
+                      position: "absolute",
+                      right: 100,
+                      top: 0,
+                    }}
+                    onClick={() => navigate(`editstory/${story._id}`)}
+                  >
+                    Edit
+                  </LoadingButton>
+                )}
                 <LoadingButton
                   type="submit"
                   variant="contained"

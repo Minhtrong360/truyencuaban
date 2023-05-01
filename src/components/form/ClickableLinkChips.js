@@ -1,40 +1,68 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Button } from "@mui/material";
-
 import { Container } from "@mui/system";
-
 import { STORIES_PER_PAGE } from "../../app/config";
 
-export default function ClickableLinkChips({ page, setPage, stories }) {
-  let iniSx = { bgcolor: "white", color: "black", mr: "13px" };
-  let defaultSx = { bgcolor: "red", color: "white", mr: "13px" };
-  let iniBtns = [];
-  const [btns, setBtns] = useState();
-
-  const btnCount = Math.ceil(stories.length / STORIES_PER_PAGE);
+export default function ClickableLinkChips({
+  page,
+  setPage,
+  stories,
+  totalPages,
+}) {
+  const [btns, setBtns] = useState([]);
 
   useEffect(() => {
-    iniBtns = [];
-    for (let i = 1; i <= btnCount; i++) {
-      iniBtns.push(
-        <Button
-          onClick={() => {
-            setPage(i);
-          }}
-          id={i}
-          key={i}
-          variant="contained"
-          color="error"
-          sx={page === i ? iniSx : defaultSx}
-          size="small"
-        >
-          {i}
-        </Button>
-      );
+    if (totalPages) {
+      const newBtns = [];
+      for (let i = 1; i <= totalPages; i++) {
+        newBtns.push(
+          <Button
+            onClick={() => {
+              setPage(i);
+            }}
+            id={i}
+            key={i}
+            variant="contained"
+            color="error"
+            sx={
+              page === i
+                ? { bgcolor: "white", color: "black", mr: "13px" }
+                : { bgcolor: "red", color: "white", mr: "13px" }
+            }
+            size="small"
+          >
+            {i}
+          </Button>
+        );
+      }
+      setBtns(newBtns);
+    } else {
+      const btnCount = Math.ceil(stories.length / STORIES_PER_PAGE);
+      const newBtns = [];
+      for (let i = 1; i <= btnCount; i++) {
+        newBtns.push(
+          <Button
+            onClick={() => {
+              setPage(i);
+            }}
+            id={i}
+            key={i}
+            variant="contained"
+            color="error"
+            sx={
+              page === i
+                ? { bgcolor: "white", color: "black", mr: "13px" }
+                : { bgcolor: "red", color: "white", mr: "13px" }
+            }
+            size="small"
+          >
+            {i}
+          </Button>
+        );
+      }
+      setBtns(newBtns);
     }
-    setBtns(iniBtns);
-  }, [stories, page, setPage]);
+  }, [stories, page, setPage, totalPages]);
 
   return (
     <Container

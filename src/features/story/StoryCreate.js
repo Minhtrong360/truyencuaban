@@ -4,7 +4,6 @@ import {
   Grid,
   Card,
   Typography,
-  Chip,
   Autocomplete,
   FormGroup,
   FormControlLabel,
@@ -12,7 +11,7 @@ import {
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, FTextField, FUploadAvatar } from "../../components/form";
@@ -21,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createStory } from "./storySlice";
 
 import { useState } from "react";
+import apiService2 from "../../app/apiService2";
 
 const UpdateStorySchema = yup.object().shape({
   title: yup.string().required("Title is required"),
@@ -34,6 +34,8 @@ function StoryCreate({ isCreating, setIsCreating }) {
   const { isLoading, error } = useSelector((state) => state.story);
 
   const [status, setStatus] = useState("start");
+  const [allowGenres, setAllowGenres] = useState([]);
+  const [newError, setNewError] = useState("");
 
   const defaultValues = {
     title: "",
@@ -97,23 +99,41 @@ function StoryCreate({ isCreating, setIsCreating }) {
     setIsCreating(true);
   };
 
-  let allowGenres = [
-    "Action",
-    "Adventure",
-    "Chuyển sinh",
-    "Comedy",
-    "Cổ đại",
-    "Drama",
-    "Fantasy",
-    "Manhwa",
-    "Magic",
-    "Mystery",
-    "Ngôn tình",
-    "Thể thao",
-    "Trọng sinh",
-    "Truyện màu",
-    "Xuyên không",
-  ];
+  useEffect(() => {
+    const getGenres = async () => {
+      try {
+        const res = await apiService2.get(`/stories/genres`);
+
+        setAllowGenres(res.data.data);
+
+        setNewError("");
+      } catch (error) {
+        console.log(error);
+        setNewError(error.message);
+      }
+    };
+    getGenres();
+  }, []);
+  //todo
+
+  // let allowGenres = [
+  //   "Action",
+  //   "Adventure",
+  //   "Chuyển sinh",
+  //   "Comedy",
+  //   "Cổ đại",
+  //   "Drama",
+  //   "Fantasy",
+  //   "Manhwa",
+  //   "Magic",
+  //   "Mystery",
+  //   "Ngôn tình",
+  //   "Thể thao",
+  //   "Trọng sinh",
+  //   "Truyện màu",
+  //   "Xuyên không",
+  // ];
+
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3} width="100vh">

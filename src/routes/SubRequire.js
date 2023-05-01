@@ -1,6 +1,6 @@
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import NestedModal from "../components/Modal";
+
 import { Box, Button, Modal } from "@mui/material";
 import { useState } from "react";
 

@@ -1,31 +1,24 @@
 import React, { useState } from "react";
 import { Container, Tab, Box, Tabs, Typography } from "@mui/material";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import ShareIcon from "@mui/icons-material/Share";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
+import ShowChartIcon from "@mui/icons-material/ShowChart";
+import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 
-import AccountGeneral from "../features/user/AccountGeneral";
-import AccountSocialLinks from "../features/user/AccountSocialLinks";
-import StoriesListOfUser from "../features/story/StoriesListOfUser";
+import Manage from "../features/status/Manage";
+import ChartGeneral from "../features/status/Chart";
 
 function AccountPage() {
-  const [currentTab, setCurrentTab] = useState("giới thiệu");
+  const [currentTab, setCurrentTab] = useState("Tăng trưởng");
 
   const ACCOUNT_TABS = [
     {
-      value: "giới thiệu",
-      icon: <AccountBoxIcon sx={{ fontSize: 30, marginTop: 4 }} />,
-      component: <AccountGeneral />,
+      value: "Tăng trưởng",
+      icon: <ShowChartIcon sx={{ fontSize: 30, marginTop: 4 }} />,
+      component: <ChartGeneral />,
     },
     {
-      value: "liên kết",
-      icon: <ShareIcon sx={{ fontSize: 30, marginTop: 4 }} />,
-      component: <AccountSocialLinks profile={{}} />,
-    },
-    {
-      value: "truyện của bạn",
-      icon: <MenuBookIcon sx={{ fontSize: 30, marginTop: 4 }} />,
-      component: <StoriesListOfUser />,
+      value: "quản lý",
+      icon: <ManageSearchIcon sx={{ fontSize: 30, marginTop: 4 }} />,
+      component: <Manage />,
     },
   ];
 
@@ -36,7 +29,7 @@ function AccountPage() {
         gutterBottom
         sx={{ my: 3, fontSize: 30, fontWeight: 800 }}
       >
-        TÀI KHOẢN
+        ADMIN DASHBOARD
       </Typography>
       <Tabs
         value={currentTab}
@@ -56,7 +49,7 @@ function AccountPage() {
         ))}
       </Tabs>
 
-      <Box sx={{ mb: 5 }} />
+      <Box sx={{ mb: 3 }} />
 
       {ACCOUNT_TABS.map((tab) => {
         const isMatched = tab.value === currentTab;

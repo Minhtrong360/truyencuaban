@@ -123,6 +123,17 @@ function MainHeader() {
             Tạo truyện mới
           </MenuItem>
 
+          {auth.user?.admin && (
+            <MenuItem
+              onClick={handleMenuClose}
+              to="/admin"
+              component={Link}
+              sx={{ mx: 1 }}
+            >
+              Admin Dashboard
+            </MenuItem>
+          )}
+
           <Divider sx={{ borderStyle: "dashed" }} />
 
           <MenuItem onClick={handleLogout} sx={{ m: 1 }}>

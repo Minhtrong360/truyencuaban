@@ -1,28 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Alert, Box, Container, Stack, Typography } from "@mui/material";
-// import ProductFilter from "./ProductFilter";
-// import ProductSearch from "./ProductSearch";
-// import ProductSort from "./ProductSort";
 
-import apiService from "../../app/apiService";
-import apiService2 from "../../app/apiService2";
 // import orderBy from "lodash/orderBy";
 import LoadingScreen from "../../components/LoadingScreen";
 import { API_KEY } from "../../app/config";
-import StoriesList from "../../components/StoriesList";
+
 import { useDispatch, useSelector } from "react-redux";
 import { getStories } from "./storySlice";
+import StoriesList from "./StoriesList";
 
 function AllStories() {
   const [page, setPage] = useState(1);
-  const { AllStories, currentPageStories, isLoading, totalPosts, error } =
-    useSelector((state) => state.story);
+  const { AllStories, currentPageStories, isLoading, error } = useSelector(
+    (state) => state.story
+  );
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getStories({ page }));
-  }, [dispatch, page, totalPosts]);
+  }, [dispatch, page]);
 
   return (
     <Container sx={{ display: "flex", minHeight: "100vh", mt: 3 }}>

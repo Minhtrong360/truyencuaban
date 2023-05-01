@@ -36,6 +36,12 @@ const slice = createSlice({
 
       state.selectedUser = action.payload;
     },
+    getAllUsersSucces(state, action) {
+      state.isLoading = false;
+      state.error = null;
+
+      state.users = action.payload;
+    },
   },
 });
 
@@ -114,15 +120,20 @@ export const getCurrentUserProfile = () => async (dispatch) => {
   }
 };
 
-export const getAllUsers = () => async (dispatch) => {
-  dispatch(slice.actions.startLoading());
-  try {
-    const response = await apiService2.get("/users");
-    dispatch(slice.actions.updateUserProfileSuccess(response.data.data));
-  } catch (error) {
-    dispatch(slice.actions.hasError(error));
-  }
-};
+export const getAllUsers =
+  ({ page, limit }) =>
+  async (dispatch) => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const response = await apiService2.get(
+        `/users?page=${page}&limit=${limit}`
+      );
+
+      dispatch(slice.actions.getAllUsersSucces(response.data.data));
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
 
 export const updateLovedStory =
   ({ userId, lovedStory }) =>

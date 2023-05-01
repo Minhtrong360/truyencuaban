@@ -26,6 +26,7 @@ import AllStoriesWithPagination from "../features/story/AllStoriesWithPagination
 import LovedStoriesListOfUser from "../features/story/LovedStoriesListOfUser";
 import StoryWithAuthorName from "../pages/StoryWithAuthorName";
 import StoryWithArtist from "../pages/StoryWithArtist";
+import AdminPage from "../pages/AdminPage";
 
 // import AuthRequire from "./AuthRequire";
 
@@ -35,6 +36,7 @@ function Router() {
       <Route path="/" element={<MainLayout />}>
         <Route index element={<HomePage />} />
         <Route path="story/:id" element={<DetailPage />} />
+        <Route path="admin" element={<AdminPage />} />
 
         <Route
           path="account/editstory/:id"
