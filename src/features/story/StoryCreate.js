@@ -102,9 +102,9 @@ function StoryCreate({ isCreating, setIsCreating }) {
   useEffect(() => {
     const getGenres = async () => {
       try {
-        const res = await apiService2.get(`/stories/genres`);
+        const res = await apiService2.get(`/genres`);
 
-        setAllowGenres(res.data.data);
+        setAllowGenres(res.data.data.genresList);
 
         setNewError("");
       } catch (error) {

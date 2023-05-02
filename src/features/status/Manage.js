@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import AdminStories from "../story/AdminStories";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
-import CommentIcon from "@mui/icons-material/Comment";
+
 import AdminUser from "./AdminUser";
-import AdminComment from "./AdminComment";
+
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+import AdminGenres from "./AdminGenres";
 function Manage() {
   const [currentTab, setCurrentTab] = useState("truyện");
   const ACCOUNT_TABS = [
@@ -18,6 +20,11 @@ function Manage() {
       value: "người dùng",
       icon: <PersonIcon sx={{ fontSize: 30, marginTop: 1 }} />,
       component: <AdminUser />,
+    },
+    {
+      value: "Thể loại",
+      icon: <BorderColorIcon sx={{ fontSize: 30, marginTop: 1 }} />,
+      component: <AdminGenres />,
     },
   ];
 

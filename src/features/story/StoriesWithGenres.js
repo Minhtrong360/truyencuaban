@@ -56,7 +56,7 @@ function StoriesWithGenres({ AllStories, genres, isLoading, error }) {
             <span>{genres?.toUpperCase()}</span>
 
             <Button
-              onClick={() => navigate(`stories/:${genres}`)}
+              onClick={() => navigate(`stories/${genres}`)}
               sx={{ fontSize: "26px" }}
             >
               XEM TẤT CẢ ▼
