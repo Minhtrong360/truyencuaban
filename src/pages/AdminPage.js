@@ -4,7 +4,7 @@ import ShowChartIcon from "@mui/icons-material/ShowChart";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 
 import Manage from "../features/status/Manage";
-import ChartGeneral from "../features/status/Chart";
+import ChartGeneral from "../features/status/AdminPage";
 
 function AccountPage() {
   const [currentTab, setCurrentTab] = useState("Tăng trưởng");

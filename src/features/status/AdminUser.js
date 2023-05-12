@@ -1,19 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../user/userSlice";
-import { Box, Button, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@mui/material";
 import LoadingScreen from "../../components/LoadingScreen";
 import ClickableLinkChips from "../../components/form/ClickableLinkChips";
 import apiService2 from "../../app/apiService2";
+import useAuth from "../../hooks/useAuth";
 
 function AdminUser() {
+  const { user } = useAuth();
   const { users, isLoading } = useSelector((state) => state.user);
   const [page, setPage] = useState(1);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllUsers({ page }));
-  }, [dispatch, page, users?.totalPages]);
+  }, [dispatch, page, users?.totalPages, user]);
 
   const handleDeleteUser = async (userId) => {
     await apiService2.delete(`/users/${userId}`).then(() => {
@@ -35,7 +48,7 @@ function AdminUser() {
   };
 
   return (
-    <Box sx={{ position: "relative", height: 1 }}>
+    <Box sx={{ position: "relative", width: "100%", height: "100%" }}>
       {isLoading ? (
         <LoadingScreen />
       ) : (
@@ -44,50 +57,49 @@ function AdminUser() {
             display: "flex",
             flexDirection: "column",
             gap: "2rem",
+            alignItems: "center",
           }}
         >
-          {users?.users?.length > 0 ? (
+          {users?.users?.length > 0 && (
             <>
-              <Box
-                sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
-              >
-                {users?.users?.map((user) => (
-                  <Box
-                    key={user.id}
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "1rem",
-                      padding: "1rem",
-                      border: "1px solid #ccc",
-                      borderRadius: "4px",
-                    }}
-                  >
-                    <Typography variant="subtitle1">
-                      Name: {user.name}
-                    </Typography>
-                    <br />
-                    <Typography variant="subtitle1">
-                      Email: {user.email}
-                    </Typography>
-                    <br />
-                    <Typography variant="subtitle1">
-                      Subscription:{" "}
-                      {user?.subscription?.isSubscription ? "true" : "false"}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Registered on: {formatDate(user.createdAt)} (
-                      {formatDaysAgo(user.createdAt)})
-                    </Typography>
-                    <Button
-                      sx={{ marginLeft: "auto" }}
-                      onClick={() => handleDeleteUser(user._id)}
-                    >
-                      Delete
-                    </Button>
-                  </Box>
-                ))}
-              </Box>
+              <Typography sx={{ fontSize: 20, fontWeight: 600 }}>
+                DANH SÁCH NGƯỜI DÙNG
+              </Typography>
+              <TableContainer>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Name</TableCell>
+                      <TableCell>Email</TableCell>
+                      <TableCell>Subscription</TableCell>
+                      <TableCell>Registered on</TableCell>
+                      <TableCell></TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {users?.users?.map((user) => (
+                      <TableRow key={user.id}>
+                        <TableCell>{user.name}</TableCell>
+                        <TableCell>{user.email}</TableCell>
+                        <TableCell>
+                          {user?.subscription?.isSubscription
+                            ? "true"
+                            : "false"}
+                        </TableCell>
+                        <TableCell>
+                          {formatDate(user.createdAt)} (
+                          {formatDaysAgo(user.createdAt)})
+                        </TableCell>
+                        <TableCell>
+                          <Button onClick={() => handleDeleteUser(user._id)}>
+                            Delete
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <ClickableLinkChips
                   page={page}
@@ -96,8 +108,6 @@ function AdminUser() {
                 />
               </Box>
             </>
-          ) : (
-            <Typography variant="h6">No Users</Typography>
           )}
         </Box>
       )}
