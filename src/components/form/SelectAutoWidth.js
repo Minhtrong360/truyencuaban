@@ -35,9 +35,6 @@ export default function MultipleSelectPlaceholder() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getStories({ page: 1, limit: 10000000000 }));
-  }, [dispatch]);
 
   useEffect(() => {
     const getGenres = async () => {
