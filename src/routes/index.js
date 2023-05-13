@@ -26,7 +26,7 @@ import AllStoriesWithPagination from "../features/story/AllStoriesWithPagination
 import LovedStoriesListOfUser from "../features/story/LovedStoriesListOfUser";
 import StoryWithAuthorName from "../pages/StoryWithAuthorName";
 import StoryWithArtist from "../pages/StoryWithArtist";
-import AdminPage from "../features/status/AdminPage";
+import AdminPage from "../pages/AdminPage";
 
 // import AuthRequire from "./AuthRequire";
 

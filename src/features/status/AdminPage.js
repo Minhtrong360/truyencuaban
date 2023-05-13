@@ -160,8 +160,8 @@ function AdminPage() {
         </Box>
         <AdminUser />
       </Box>
-      <Divider sx={{ margin: 3 }} />
-      <AdminStories />
+      {/* <Divider sx={{ margin: 3 }} /> */}
+      {/* <AdminStories /> */}
     </Container>
   );
 }

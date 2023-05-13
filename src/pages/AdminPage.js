@@ -5,6 +5,7 @@ import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 
 import Manage from "../features/status/Manage";
 import ChartGeneral from "../features/status/AdminPage";
+import AdminStories from "../features/story/AdminStories";
 
 function AccountPage() {
   const [currentTab, setCurrentTab] = useState("Tăng trưởng");
@@ -16,9 +17,9 @@ function AccountPage() {
       component: <ChartGeneral />,
     },
     {
-      value: "quản lý",
+      value: "Nội dung",
       icon: <ManageSearchIcon sx={{ fontSize: 30, marginTop: 4 }} />,
-      component: <Manage />,
+      component: <AdminStories />,
     },
   ];
 
