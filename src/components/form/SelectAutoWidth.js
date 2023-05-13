@@ -7,13 +7,16 @@ import Select from "@mui/material/Select";
 import { useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getStories } from "../../features/story/storySlice";
 import { useState } from "react";
 import apiService2 from "../../app/apiService2";
 import useAuth from "../../hooks/useAuth";
+import { Typography } from "@mui/material";
+import { grey } from "@mui/material/colors";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
+
 const MenuProps = {
   PaperProps: {
     style: {
@@ -56,44 +59,45 @@ export default function MultipleSelectPlaceholder() {
   }, [user]);
 
   return (
-    <div>
-      <FormControl sx={{ m: 1, width: 200 }}>
-        <Select
-          multiple
-          displayEmpty
-          value={[]}
-          sx={{
-            fontWeight: 400,
-            color: "white",
-            fontSize: "1.2rem",
-          }}
-          input={<OutlinedInput />}
-          renderValue={(selected) => {
-            if (selected.length === 0) {
-              return <em> Thể loại khác</em>;
-            }
+    <FormControl size="small">
+      <Select
+        multiple
+        displayEmpty
+        value={[]}
+        sx={
+          {
+            // fontWeight: 400,
+            // color: "white",
+            // fontSize: "1.2rem",
+          }
+        }
+        input={<OutlinedInput />}
+        renderValue={(selected) => {
+          if (selected.length === 0) {
+            return <Typography children="Categories" color={grey[500]} />;
+          }
 
-            return selected.join(", ");
-          }}
-          MenuProps={MenuProps}
-          inputProps={{ "aria-label": "Without label" }}
-        >
-          {allowGenres?.map((genre) => (
-            <MenuItem
-              sx={{ padding: "7.5px 14px" }}
-              key={genre}
-              value={genre}
-              // ref={ref}
-              onClick={() => {
-                navigate(`stories/:${genre}`);
-              }}
-              // style={getStyles(name, personName, theme)}
-            >
-              {genre?.toUpperCase()}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </div>
+          return selected.join(", ");
+        }}
+        label="Categories"
+        MenuProps={MenuProps}
+        inputProps={{ "aria-label": "Without label" }}
+      >
+        {allowGenres?.map((genre) => (
+          <MenuItem
+            // sx={{ padding: "7.5px 14px" }}
+            key={genre}
+            value={genre}
+            // ref={ref}
+            onClick={() => {
+              navigate(`stories/:${genre}`);
+            }}
+            // style={getStyles(name, personName, theme)}
+          >
+            {genre?.toUpperCase()}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   );
 }
