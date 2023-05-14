@@ -8,8 +8,11 @@ import {
   Tabs,
   Tab,
   Button,
-  IconButton,
   Chip,
+  Paper,
+  Avatar,
+  Stack,
+  Divider,
 } from "@mui/material";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
@@ -35,6 +38,7 @@ import { updateLovedStory } from "../features/user/userSlice";
 import useAuth from "../hooks/useAuth";
 
 import ChapterGeneral from "../features/chapter/ChapterGeneral";
+import { GridOnSharp } from "@mui/icons-material";
 
 const TabsWrapperStyle = styled("div")(({ theme }) => ({
   zIndex: 9,
@@ -63,7 +67,6 @@ const StyledLink = styled(Link)(({ theme }) => ({
 
 function DetailPage() {
   const [chapter, setChapter] = useState(null);
-
   const [error, setError] = useState("");
   const params = useParams();
   const dispatch = useDispatch();
@@ -131,7 +134,7 @@ function DetailPage() {
   const [currentTab, setCurrentTab] = useState("chương");
   const PROFILE_TAB = [
     {
-      value: "chương",
+      value: "Chapter",
       component: (
         <Container
           sx={{
@@ -165,7 +168,7 @@ function DetailPage() {
                     p={1}
                     sx={{ overflow: "auto", textAlign: "center" }}
                   >
-                    DANH SÁCH CHƯƠNG
+                    list of chapters
                   </Typography>
                 </Box>
               )}
@@ -188,7 +191,7 @@ function DetailPage() {
       ),
     },
     {
-      value: "Bình luận",
+      value: "Comment",
       component: (
         <Grid item xs={12} md={6} lg={2.4} width="80% !important">
           <CommentForm storyId={params.id} />
@@ -204,8 +207,9 @@ function DetailPage() {
   };
 
   return (
-    <Container sx={{ my: 3, overflowAnchor: "none" }}>
-      <Box sx={{ position: "relative", height: 1 }}>
+    // <Container sx={{ my: 3, overflowAnchor: "none" }}>
+    <Container maxWidth="lg" sx={{ py: 5 }}>
+      <Box>
         {isLoading ? (
           <LoadingScreen />
         ) : (
@@ -215,203 +219,163 @@ function DetailPage() {
             ) : (
               <>
                 {story && (
-                  <Box
+                  <Card
                     sx={{
-                      position: "relative",
+                      p: 1,
+                      backgroundImage: `url(${story?.cover})`,
+                      backgroundSize: "cover",
+                      backgroundRepeat: "no-repeat",
                     }}
                   >
-                    <IconButton
-                      sx={{
-                        position: "absolute",
-                        top: 0,
-                        right: 0,
-                        zIndex: 1,
-                        // backgroundColor: "white",
-                        borderRadius: "50%",
-                      }}
-                      onClick={handleLoveStory}
-                    >
-                      {!lovedStory && (
-                        <FavoriteBorderIcon sx={{ fontSize: "40px" }} />
-                      )}
-                      {lovedStory && <FavoriteIcon sx={{ fontSize: "40px" }} />}
-                    </IconButton>
-                    <Card>
-                      <Grid container>
-                        <Grid item xs={12} md={6} lg={12}>
-                          <Box p={2}>
-                            <Box
+                    <Box backgroundColor="rgb(0,0,0,0.9)" padding={5}>
+                      <Grid container justifyContent={"space-between"}>
+                        <Grid item sm={8} md={7}>
+                          <Stack alignItems={"end"} spacing={3}>
+                            <Avatar
+                              sx={{ width: 80, height: 80 }}
+                              src={story?.cover}
+                              alt={story?.title}
+                            />
+                            <Typography
+                              color="text.primary"
+                              variant="h4"
+                              fontWeight="bold"
+                              textAlign="right"
+                            >
+                              {story?.title?.toUpperCase()}
+                            </Typography>
+                            <Typography
+                              color="text.secondary"
+                              variant="caption"
+                              textAlign="right"
+                            >
+                              {story?.summarize}
+                            </Typography>
+                          </Stack>
+                        </Grid>
+                        <Grid item ms={1}>
+                          <Divider orientation="vertical" />
+                        </Grid>
+                        <Grid item sm={8} md={4}>
+                          <Stack justifyContent="flex-end" height="100%">
+                            <Typography
+                              color="text.primary"
+                              p={1}
                               sx={{
-                                borderRadius: 2,
-                                overflow: "hidden",
-                                display: "flex",
-                                flexDirection: "row",
-                                justifyContent: "start",
-                                alignItems: "center",
+                                overflow: "auto",
+                                textAlign: "justify",
+                                textDecoration: "none",
                               }}
                             >
-                              <Box
-                                component="img"
+                              Author:
+                              <br />
+                              {story?.authorName !== "Updating..." ? (
+                                <StyledLink to={`/author/${story?.authorName}`}>
+                                  {story?.authorName}
+                                </StyledLink>
+                              ) : (
+                                story?.authorName
+                              )}
+                            </Typography>
+                            <Typography
+                              color="text.primary"
+                              p={1}
+                              sx={{
+                                overflow: "auto",
+                                textAlign: "justify",
+                              }}
+                            >
+                              Artist:
+                              <br />
+                              {story?.artist !== "Updating..." ? (
+                                <StyledLink to={`/artist/${story?.artist}`}>
+                                  {story?.artist}
+                                </StyledLink>
+                              ) : (
+                                story?.artist
+                              )}
+                            </Typography>
+                            <Typography
+                              variant="h7"
+                              paragraph
+                              p={1}
+                              sx={{
+                                overflow: "auto",
+                                textAlign: "justify",
+                                margin: 0,
+                              }}
+                            >
+                              Categories:
+                              <br />
+                              {story?.genres?.map((genre) => (
+                                <Chip
+                                  key={genre}
+                                  label={genre}
+                                  component={Link}
+                                  to={`/stories/:${genre}`}
+                                  sx={{
+                                    cursor: "pointer",
+                                    "&:hover": {
+                                      color: "orange", // add color property to change text color on hover
+                                    },
+                                  }}
+                                />
+                              ))}
+                            </Typography>
+                            <Typography
+                              color="text.primary"
+                              p={1}
+                              sx={{
+                                overflow: "auto",
+                                textAlign: "justify",
+                              }}
+                            >
+                              Recommended age:
+                              <br />
+                              {story?.minimumAge}
+                            </Typography>
+
+                            <Box
+                              color="text.primary"
+                              p={1}
+                              sx={{
+                                overflow: "auto",
+                                textAlign: "justify",
+                                display: "flex",
+                              }}
+                            >
+                              <VisibilityIcon />
+                              <Box sx={{ marginLeft: 1 }}>{story?.view}</Box>
+                              <Button
                                 sx={{
-                                  width: 300,
-                                  height: 400,
-                                  marginRight: 3,
+                                  p: 0,
+                                  color: "white",
+                                  marginLeft: 2,
+                                  borderRadius: "50%",
                                 }}
-                                src={story?.cover}
-                                alt={story?.title}
-                              />
-                              <Box>
-                                <Typography
-                                  color="text.primary"
-                                  p={1}
-                                  sx={{
-                                    overflow: "auto",
-                                    textAlign: "center", // center the title text
-                                    fontSize: "30px",
-                                    textDecoration: "none",
-                                    wordWrap: "break-word",
-                                    maxWidth: "90%", // set the maximum width to 70%
-                                    margin: "auto", // center the title horizontally
-                                  }}
-                                >
-                                  {story?.title?.toUpperCase()}
-                                </Typography>
-                                <Typography
-                                  color="text.primary"
-                                  p={1}
-                                  sx={{
-                                    overflow: "auto",
-                                    textAlign: "justify",
-                                    textDecoration: "none",
-                                  }}
-                                >
-                                  Tác giả:
-                                  <br />
-                                  {story?.authorName !== "Đang Cập Nhật" ? (
-                                    <StyledLink
-                                      to={`/author/${story?.authorName}`}
-                                    >
-                                      {story?.authorName}
-                                    </StyledLink>
-                                  ) : (
-                                    story?.authorName
-                                  )}
-                                </Typography>
-                                <Typography
-                                  color="text.primary"
-                                  p={1}
-                                  sx={{
-                                    overflow: "auto",
-                                    textAlign: "justify",
-                                  }}
-                                >
-                                  Họa sĩ:
-                                  <br />
-                                  {story?.artist !== "Đang Cập Nhật" ? (
-                                    <StyledLink to={`/artist/${story?.artist}`}>
-                                      {story?.artist}
-                                    </StyledLink>
-                                  ) : (
-                                    story?.artist
-                                  )}
-                                </Typography>
-                                <Typography
-                                  variant="h7"
-                                  paragraph
-                                  p={1}
-                                  sx={{
-                                    overflow: "auto",
-                                    textAlign: "justify",
-                                    margin: 0,
-                                  }}
-                                >
-                                  Thể loại:
-                                  <br />
-                                  {story?.genres?.map((genre) => (
-                                    <Chip
-                                      key={genre}
-                                      label={genre}
-                                      component={Link}
-                                      to={`/stories/:${genre}`}
-                                      sx={{
-                                        margin: "0.5rem",
-                                        cursor: "pointer",
-                                        "&:hover": {
-                                          color: "orange", // add color property to change text color on hover
-                                        },
-                                      }}
-                                    />
-                                  ))}
-                                </Typography>
-                                <Typography
-                                  color="text.primary"
-                                  p={1}
-                                  sx={{
-                                    overflow: "auto",
-                                    textAlign: "justify",
-                                  }}
-                                >
-                                  Tuổi tối thiểu:
-                                  <br />
-                                  {story?.minimumAge}
-                                </Typography>
-                                <Typography
-                                  color="text.primary"
-                                  p={1}
-                                  sx={{
-                                    overflow: "auto",
-                                    textAlign: "justify",
-                                  }}
-                                >
-                                  Giới thiệu:
-                                  <br />
-                                  {story?.summarize}
-                                </Typography>
-                                <Box
-                                  color="text.primary"
-                                  p={1}
-                                  sx={{
-                                    overflow: "auto",
-                                    textAlign: "justify",
-                                    display: "flex",
-                                  }}
-                                >
-                                  <VisibilityIcon />
-                                  <Box sx={{ marginLeft: 1 }}>
-                                    {story?.view}
-                                  </Box>
-                                  <Button
-                                    sx={{
-                                      p: 0,
-                                      color: "white",
-                                      marginLeft: 2,
-                                      borderRadius: "50%",
-                                    }}
-                                    onClick={(e) => handleClickLike(e)}
-                                  >
-                                    <ThumbUpOffAltIcon />
-                                  </Button>
-                                  <Box>{story?.reactions?.like}</Box>
-                                  <Button
-                                    sx={{
-                                      p: 0,
-                                      color: "white",
-                                      marginLeft: 2,
-                                      borderRadius: "50%",
-                                    }}
-                                    onClick={(e) => handleClickDisLike(e)}
-                                  >
-                                    <ThumbDownOffAltIcon />
-                                  </Button>
-                                  <Box>{story?.reactions?.disLike}</Box>
-                                </Box>
-                              </Box>
+                                onClick={(e) => handleClickLike(e)}
+                              >
+                                <ThumbUpOffAltIcon />
+                              </Button>
+                              <Box>{story?.reactions?.like}</Box>
+                              <Button
+                                sx={{
+                                  p: 0,
+                                  color: "white",
+                                  marginLeft: 2,
+                                  borderRadius: "50%",
+                                }}
+                                onClick={(e) => handleClickDisLike(e)}
+                              >
+                                <ThumbDownOffAltIcon />
+                              </Button>
+                              <Box>{story?.reactions?.disLike}</Box>
                             </Box>
-                          </Box>
+                          </Stack>
                         </Grid>
                       </Grid>
-                    </Card>
-                  </Box>
+                    </Box>
+                  </Card>
                 )}
 
                 <Box
