@@ -12,7 +12,7 @@ function StoriesList({ stories, noSlide }) {
 
       return () => clearInterval(intervalId);
     }
-  }, [currentIndex]);
+  }, [currentIndex, setCurrentIndex, stories.length, noSlide]);
 
   let displayItems;
   if (stories.length < 5) {
@@ -24,6 +24,8 @@ function StoriesList({ stories, noSlide }) {
       stories[(currentIndex + 1) % stories.length],
       stories[(currentIndex + 2) % stories.length],
       stories[(currentIndex + 3) % stories.length],
+      stories[(currentIndex + 4) % stories.length],
+      stories[(currentIndex + 5) % stories.length],
     ];
   } else {
     displayItems = stories;
@@ -31,22 +33,23 @@ function StoriesList({ stories, noSlide }) {
 
   return (
     <Grid container spacing={2} mt={1} sx={{ overflow: "hidden" }}>
-      {displayItems.map((story, index) => (
-        <Grid
-          item
-          xs={6}
-          md={4}
-          lg={2.8}
-          key={story?._id}
-          sx={{
-            margin: 1,
-            transition: "all 1s ease-out",
-            transform: "translateX(0%)",
-          }}
-        >
-          <StoryCard story={story} key={index} />
-        </Grid>
-      ))}
+      {displayItems?.map((story, index) => {
+        return (
+          <Grid
+            item
+            xs={4}
+            md={3}
+            lg={2}
+            key={story?._id}
+            sx={{
+              transition: "all 0.6s ease-out",
+              transform: "translateX(0%)",
+            }}
+          >
+            <StoryCard story={story} key={index} />
+          </Grid>
+        );
+      })}
     </Grid>
   );
 }

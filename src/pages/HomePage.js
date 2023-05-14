@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import StoriesWithGenres from "../features/story/StoriesWithGenres";
 import { useDispatch, useSelector } from "react-redux";
 import { getStories } from "../features/story/storySlice";
+import { Container, Stack } from "@mui/material";
 
 function HomePage() {
   const { AllStories, isLoading, error } = useSelector((state) => state.story);
@@ -13,7 +14,7 @@ function HomePage() {
     dispatch(getStories({ page: 1, limit: 1000 }));
   }, [dispatch]);
   return (
-    <>
+    <Container maxWidth="lg">
       <StoriesWithGenres
         genres={"Adventure"}
         AllStories={AllStories}
@@ -21,42 +22,30 @@ function HomePage() {
         error={error}
       />
       <StoriesWithGenres
-        genres={"comedy"}
+        genres={"Comedy"}
         AllStories={AllStories}
         isLoading={isLoading}
         error={error}
       />
       <StoriesWithGenres
-        genres={"drama"}
+        genres={"Drama"}
         AllStories={AllStories}
         isLoading={isLoading}
         error={error}
       />
       <StoriesWithGenres
-        genres={"hành động"}
+        genres={"Action"}
         AllStories={AllStories}
         isLoading={isLoading}
         error={error}
       />
       <StoriesWithGenres
-        genres={"magic"}
+        genres={"Magic"}
         AllStories={AllStories}
         isLoading={isLoading}
         error={error}
       />
-      <StoriesWithGenres
-        genres={"thể thao"}
-        AllStories={AllStories}
-        isLoading={isLoading}
-        error={error}
-      />
-      <StoriesWithGenres
-        genres={"xuyên không"}
-        AllStories={AllStories}
-        isLoading={isLoading}
-        error={error}
-      />
-    </>
+    </Container>
   );
 }
 

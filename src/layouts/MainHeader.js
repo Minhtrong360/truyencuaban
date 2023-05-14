@@ -242,7 +242,7 @@ function MainHeader() {
           <Stack flexDirection="row">
             <Avatar
               onClick={handleProfileMenuOpen}
-              src={auth?.user?.cover}
+              src={`${auth?.user?.cover}`}
               alt={auth?.user?.username}
 
               // sx={{ width: 52, height: 52 }}

@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   Container,
+  Divider,
   Stack,
   Typography,
 } from "@mui/material";
@@ -12,72 +13,54 @@ import LoadingScreen from "../../components/LoadingScreen";
 
 import StoriesList from "../story/StoriesList";
 
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function StoriesWithGenres({ AllStories, genres, isLoading, error }) {
-  const navigate = useNavigate();
   let storiesWithGenres = AllStories.filter((story) =>
     story.genres
       .map((genre) => genre.toLowerCase())
       .includes(genres.toLowerCase())
   );
-  if (genres === "hành động") {
-    storiesWithGenres = [
-      ...storiesWithGenres,
-      ...AllStories.filter((story) => story.genres.includes("Action")),
-    ];
-  }
 
   return (
-    <Container sx={{ display: "flex", mt: 3, height: "40rem" }}>
-      <Stack sx={{ flexGrow: 1 }}>
+    <Container maxWidth="lg" sx={{ marginY: 5 }}>
+      <Stack
+        spacing={2}
+        direction={{ xs: "column", sm: "row" }}
+        alignItems={{ sm: "center" }}
+        justifyContent="space-between"
+      >
         <Stack
-          spacing={2}
-          direction={{ xs: "column", sm: "row" }}
-          alignItems={{ sm: "center" }}
+          component="div"
+          noWrap
+          direction="row"
           justifyContent="space-between"
-          mb={0}
+          alignItems="center"
+          width="100%"
         >
-          <Typography
-            gutterBottom
-            variant="body1"
-            component="div"
-            noWrap
-            sx={{
-              fontSize: 30,
-              fontWeight: 800,
-              display: "flex",
-              width: "100%",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <span>{genres?.toUpperCase()}</span>
-
-            <Button
-              onClick={() => navigate(`stories/${genres}`)}
-              sx={{ fontSize: "26px" }}
-            >
-              XEM TẤT CẢ ▼
-            </Button>
+          <Typography variant="h5" fontWeight="bold">
+            {`| ${genres?.toUpperCase()}`}
           </Typography>
+          <Button component={Link} to={`stories/${genres}`}>
+            see more
+          </Button>
         </Stack>
-
-        <Box sx={{ position: "relative", height: 1 }}>
-          {isLoading ? (
-            <LoadingScreen />
-          ) : (
-            <>
-              {error ? (
-                <Alert severity="error">{error}</Alert>
-              ) : (
-                <StoriesList stories={storiesWithGenres} />
-              )}
-            </>
-          )}
-        </Box>
       </Stack>
+      <Divider />
+
+      <Box sx={{ position: "relative", height: 1 }}>
+        {isLoading ? (
+          <LoadingScreen />
+        ) : (
+          <>
+            {error ? (
+              <Alert severity="error">{error}</Alert>
+            ) : (
+              <StoriesList stories={storiesWithGenres} />
+            )}
+          </>
+        )}
+      </Box>
     </Container>
   );
 }
