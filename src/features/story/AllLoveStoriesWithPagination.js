@@ -36,7 +36,7 @@ function AllLoveStoriesWithPagination() {
       <Stack sx={{ flexGrow: 1 }}>
         <Breadcrumbs aria-label="breadcrumb" sx={{ fontSize: "1.5em" }}>
           <Link underline="hover" color="inherit" href="/">
-            MangaRolls
+            Home
           </Link>
           <Link underline="hover" color="inherit" href="/stories/love-stories">
             Favorites

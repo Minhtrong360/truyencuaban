@@ -212,7 +212,7 @@ function DetailPage() {
         sx={{ fontSize: "1.5em", marginBottom: 3 }}
       >
         <MuiLink underline="hover" color="inherit" href="/">
-          MangaRolls
+          Home
         </MuiLink>
         <MuiLink underline="hover" color="inherit">
           {story?.title}

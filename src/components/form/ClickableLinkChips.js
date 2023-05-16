@@ -26,8 +26,18 @@ export default function ClickableLinkChips({
             color="error"
             sx={
               page === i
-                ? { bgcolor: "white", color: "black", mr: "13px" }
-                : { bgcolor: "red", color: "white", mr: "13px" }
+                ? {
+                    bgcolor: "white",
+                    color: "black",
+                    mr: "13px",
+                    borderRadius: 50,
+                  }
+                : {
+                    bgcolor: "red",
+                    color: "white",
+                    mr: "13px",
+                    borderRadius: 50,
+                  }
             }
             size="small"
           >
@@ -51,8 +61,18 @@ export default function ClickableLinkChips({
             color="error"
             sx={
               page === i
-                ? { bgcolor: "white", color: "black", mr: "13px" }
-                : { bgcolor: "red", color: "white", mr: "13px" }
+                ? {
+                    bgcolor: "white",
+                    color: "black",
+                    mr: "13px",
+                    borderRadius: 50,
+                  }
+                : {
+                    bgcolor: "red",
+                    color: "white",
+                    mr: "13px",
+                    borderRadius: 50,
+                  }
             }
             size="small"
           >

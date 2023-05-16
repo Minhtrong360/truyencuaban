@@ -68,10 +68,10 @@ function AllStoriesWithPagination() {
         >
           <Breadcrumbs aria-label="breadcrumb" sx={{ fontSize: "1.5em" }}>
             <Link underline="hover" color="inherit" href="/">
-              MangaRolls
+              Home
             </Link>
             <Link underline="hover" color="inherit" href={`/stories/${genres}`}>
-              {genres.toUpperCase()}
+              {genres}
             </Link>
           </Breadcrumbs>
         </Stack>

@@ -55,10 +55,10 @@ function StoryWithArtist() {
         >
           <Breadcrumbs aria-label="breadcrumb" sx={{ fontSize: "1.5em" }}>
             <Link underline="hover" color="inherit" href="/">
-              MangaRolls
+              Home
             </Link>
             <Link underline="hover" color="inherit" href={`/stories/${artist}`}>
-              {artist.toUpperCase()}
+              {artist}
             </Link>
           </Breadcrumbs>
         </Stack>

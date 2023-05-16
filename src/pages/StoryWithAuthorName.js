@@ -55,14 +55,14 @@ function StoryWithAuthorName() {
         >
           <Breadcrumbs aria-label="breadcrumb" sx={{ fontSize: "1.5em" }}>
             <Link underline="hover" color="inherit" href="/">
-              MangaRolls
+              Home
             </Link>
             <Link
               underline="hover"
               color="inherit"
               href={`/stories/${authorName}`}
             >
-              {authorName.toUpperCase()}
+              {authorName}
             </Link>
           </Breadcrumbs>
         </Stack>
