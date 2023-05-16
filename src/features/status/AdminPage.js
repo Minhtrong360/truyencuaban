@@ -119,7 +119,7 @@ function AdminPage() {
             }}
           >
             <Typography sx={{ fontSize: 20, fontWeight: 600 }}>
-              BIỂU ĐỒ TĂNG TRƯỞNG
+              GROWTH CHART
             </Typography>
             <ButtonGroup style={{ margin: "10px" }}>
               <Button

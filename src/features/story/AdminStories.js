@@ -70,7 +70,7 @@ function AdminStories() {
                 }}
               >
                 <Typography sx={{ fontSize: 20, fontWeight: 600 }}>
-                  DANH SÁCH TRUYỆN
+                  LIST OF STORIES
                 </Typography>
                 <AdminManageGenres />
               </Box>
@@ -79,10 +79,12 @@ function AdminStories() {
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell>Cover</TableCell>
-                      <TableCell>Title</TableCell>
-                      <TableCell>View</TableCell>
-                      <TableCell>Date Created</TableCell>
+                      <TableCell style={{ fontSize: "1.2em" }}>Cover</TableCell>
+                      <TableCell style={{ fontSize: "1.2em" }}>Title</TableCell>
+                      <TableCell style={{ fontSize: "1.2em" }}>View</TableCell>
+                      <TableCell style={{ fontSize: "1.2em" }}>
+                        Date Created
+                      </TableCell>
                       <TableCell></TableCell>
                     </TableRow>
                   </TableHead>

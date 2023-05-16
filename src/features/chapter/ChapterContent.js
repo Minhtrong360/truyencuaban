@@ -180,7 +180,7 @@ function ChapterContent() {
                 {showChapters && (
                   <ChatBoxWrapper>
                     <Typography sx={{ fontSize: "28px" }}>
-                      DANH SÁCH CHƯƠNG
+                      LIST OF CHAPTERS
                     </Typography>
                     <Stack p={1} />
                     <Box

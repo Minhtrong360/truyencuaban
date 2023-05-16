@@ -86,7 +86,7 @@ function ChapterGeneral({ chapter, loading, error }) {
                                   navigate(`/chapter/${chapter._id}`)
                                 }
                               >
-                                Đọc
+                                Read
                               </Button>
                             </Box>
                           </Box>

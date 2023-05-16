@@ -58,7 +58,7 @@ function AllSearchStories() {
               justifyContent: "space-between",
             }}
           >
-            <span>Kết quả: {query}</span>
+            <span>Results: {query}</span>
           </Typography>
         </Stack>
 
@@ -68,7 +68,7 @@ function AllSearchStories() {
           ) : (
             <>
               {result.length === 0 && (
-                <h2 style={{ textAlign: "center" }}>Không tìm thấy kết quả</h2>
+                <h2 style={{ textAlign: "center" }}>NOT FOUND</h2>
               )}
               {result.length > 0 && (
                 <>
@@ -93,7 +93,7 @@ function AllSearchStories() {
             ) : (
               <>
                 <Typography sx={{ fontSize: 30, fontWeight: 800 }} gutterBottom>
-                  CÓ THỂ BẠN SẼ THÍCH?
+                  SUGGESTIONS
                 </Typography>
                 <StoriesList stories={sortedStories.slice(0, 20)} />
               </>

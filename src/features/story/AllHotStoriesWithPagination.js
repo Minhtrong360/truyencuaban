@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Alert, Box, Container, Stack, Typography } from "@mui/material";
+import { Alert, Box, Breadcrumbs, Container, Stack } from "@mui/material";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getStoriesWithSort } from "./storySlice";
 import LoadingScreen from "../../components/LoadingScreen";
 import StoriesList from "./StoriesList";
 import ClickableLinkChips from "../../components/form/ClickableLinkChips";
+import Link from "@mui/material/Link";
 
 function AllHotStoriesWithPagination() {
   const { AllStoriesWithSort, isLoading, error } = useSelector(
@@ -26,30 +27,14 @@ function AllHotStoriesWithPagination() {
   return (
     <Container sx={{ display: "flex", mt: 3 }}>
       <Stack sx={{ flexGrow: 1 }}>
-        <Stack
-          spacing={2}
-          direction={{ xs: "column", sm: "row" }}
-          alignItems={{ sm: "center" }}
-          justifyContent="space-between"
-          mb={0}
-        >
-          <Typography
-            gutterBottom
-            variant="body1"
-            component="div"
-            noWrap
-            sx={{
-              fontSize: 30,
-              fontWeight: 800,
-              display: "flex",
-              width: "100%",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <span>TRUYỆN HOT</span>
-          </Typography>
-        </Stack>
+        <Breadcrumbs aria-label="breadcrumb" sx={{ fontSize: "1.5em" }}>
+          <Link underline="hover" color="inherit" href="/">
+            MangaRolls
+          </Link>
+          <Link underline="hover" color="inherit" href="/stories/hot-stories">
+            Popular
+          </Link>
+        </Breadcrumbs>
 
         <Box sx={{ position: "relative", height: 1 }}>
           {isLoading ? (

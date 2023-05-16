@@ -8,16 +8,16 @@ import ChartGeneral from "../features/status/AdminPage";
 import AdminStories from "../features/story/AdminStories";
 
 function AccountPage() {
-  const [currentTab, setCurrentTab] = useState("Tăng trưởng");
+  const [currentTab, setCurrentTab] = useState("GROWTH");
 
   const ACCOUNT_TABS = [
     {
-      value: "Tăng trưởng",
+      value: "GROWTH",
       icon: <ShowChartIcon sx={{ fontSize: 30, marginTop: 4 }} />,
       component: <ChartGeneral />,
     },
     {
-      value: "Nội dung",
+      value: "CONTENTS",
       icon: <ManageSearchIcon sx={{ fontSize: 30, marginTop: 4 }} />,
       component: <AdminStories />,
     },

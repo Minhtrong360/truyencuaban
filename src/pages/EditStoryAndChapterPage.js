@@ -109,7 +109,7 @@ function EditStoryAndChapterPage() {
                             textAlign: "center",
                           }}
                         >
-                          DANH SÁCH CHƯƠNG
+                          LIST OF CHAPTERS
                         </Typography>
                       </Box>
                     )}

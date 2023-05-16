@@ -82,14 +82,11 @@ export default function MultipleSelectPlaceholder() {
       >
         {allowGenres?.map((genre) => (
           <MenuItem
-            // sx={{ padding: "7.5px 14px" }}
             key={genre}
             value={genre}
-            // ref={ref}
             onClick={() => {
               navigate(`stories/:${genre}`);
             }}
-            // style={getStyles(name, personName, theme)}
           >
             {genre?.toUpperCase()}
           </MenuItem>

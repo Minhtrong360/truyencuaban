@@ -108,7 +108,7 @@ function LovedStoryCard({ story }) {
                     textAlign: "justify",
                   }}
                 >
-                  Thể loại:
+                  Categories:
                   {story?.genres?.map((genre) => (
                     <Chip
                       key={genre}

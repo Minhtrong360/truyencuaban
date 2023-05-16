@@ -63,7 +63,7 @@ function AdminUser() {
           {users?.users?.length > 0 && (
             <>
               <Typography sx={{ fontSize: 20, fontWeight: 600 }}>
-                DANH SÁCH NGƯỜI DÙNG
+                LIST OF USERS
               </Typography>
               <TableContainer>
                 <Table>

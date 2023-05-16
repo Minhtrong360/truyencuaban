@@ -9,10 +9,11 @@ import {
   Tab,
   Button,
   Chip,
-  Paper,
   Avatar,
   Stack,
   Divider,
+  Breadcrumbs,
+  Link as MuiLink,
 } from "@mui/material";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
@@ -22,8 +23,6 @@ import { Alert } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import CommentForm from "../features/comment/CommentForm";
 import { styled } from "@mui/material/styles";
@@ -38,7 +37,6 @@ import { updateLovedStory } from "../features/user/userSlice";
 import useAuth from "../hooks/useAuth";
 
 import ChapterGeneral from "../features/chapter/ChapterGeneral";
-import { GridOnSharp } from "@mui/icons-material";
 
 const TabsWrapperStyle = styled("div")(({ theme }) => ({
   zIndex: 9,
@@ -168,7 +166,7 @@ function DetailPage() {
                     p={1}
                     sx={{ overflow: "auto", textAlign: "center" }}
                   >
-                    list of chapters
+                    List of chapters
                   </Typography>
                 </Box>
               )}
@@ -209,7 +207,18 @@ function DetailPage() {
   return (
     // <Container sx={{ my: 3, overflowAnchor: "none" }}>
     <Container maxWidth="lg" sx={{ py: 5 }}>
-      <Box>
+      <Breadcrumbs
+        aria-label="breadcrumb"
+        sx={{ fontSize: "1.5em", marginBottom: 3 }}
+      >
+        <MuiLink underline="hover" color="inherit" href="/">
+          MangaRolls
+        </MuiLink>
+        <MuiLink underline="hover" color="inherit">
+          {story?.title}
+        </MuiLink>
+      </Breadcrumbs>
+      <Box sx={{ position: "relative", width: "100%", height: "100%" }}>
         {isLoading ? (
           <LoadingScreen />
         ) : (

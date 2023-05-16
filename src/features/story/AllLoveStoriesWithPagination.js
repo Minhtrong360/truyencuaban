@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Alert, Box, Container, Stack, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Breadcrumbs,
+  Container,
+  Link,
+  Stack,
+  Typography,
+} from "@mui/material";
 
 import StoriesList from "./StoriesList";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,30 +34,14 @@ function AllLoveStoriesWithPagination() {
   return (
     <Container sx={{ display: "flex", mt: 3 }}>
       <Stack sx={{ flexGrow: 1 }}>
-        <Stack
-          spacing={2}
-          direction={{ xs: "column", sm: "row" }}
-          alignItems={{ sm: "center" }}
-          justifyContent="space-between"
-          mb={0}
-        >
-          <Typography
-            gutterBottom
-            variant="body1"
-            component="div"
-            noWrap
-            sx={{
-              fontSize: 30,
-              fontWeight: 800,
-              display: "flex",
-              width: "100%",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <span>TRUYỆN YÊU THÍCH</span>
-          </Typography>
-        </Stack>
+        <Breadcrumbs aria-label="breadcrumb" sx={{ fontSize: "1.5em" }}>
+          <Link underline="hover" color="inherit" href="/">
+            MangaRolls
+          </Link>
+          <Link underline="hover" color="inherit" href="/stories/love-stories">
+            Favorites
+          </Link>
+        </Breadcrumbs>
 
         <Box sx={{ position: "relative", height: 1 }}>
           {isLoading ? (

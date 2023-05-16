@@ -123,7 +123,7 @@ export default function AdminManageGenres() {
             input={<OutlinedInput />}
             renderValue={(selected) => {
               if (selected.length === 0) {
-                return <em> Thể loại</em>;
+                return <em> Categories</em>;
               }
 
               return selected.join(", ");
@@ -155,7 +155,7 @@ export default function AdminManageGenres() {
           </Select>
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <TextField
-              label="Thể loại mới"
+              label="New category"
               variant="outlined"
               value={newGenre}
               onChange={handleInputChange}
